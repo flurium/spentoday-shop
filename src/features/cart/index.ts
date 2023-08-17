@@ -1,5 +1,6 @@
-import { createCart } from "./logic/store";
+import { createCart } from "./logic/store"
 
-export { default as Cart } from "./ui/Cart.svelte";
+export { default as CartDialogContent } from "./ui/CartDialogContent.svelte"
+export { default as CartIcon } from "./ui/CartIcon.svelte"
 
-export const cart = createCart();
+export const cart = createCart()
