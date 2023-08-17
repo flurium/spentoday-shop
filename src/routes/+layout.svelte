@@ -1,19 +1,20 @@
 <script lang="ts">
+  import "../app.css"
   import { CartDialogContent, CartIcon } from "$features/cart"
   import Dialog from "$lib/components/Dialog.svelte"
-  import "../app.css"
+  import type { LayoutData } from "./$types"
+
+  export let data: LayoutData
 
   let cartOpen = false
   function toggleCartDialog() {
     cartOpen = !cartOpen
   }
-
-  let name: string = "Cloth."
 </script>
 
 <header class="border-b border-b-lines">
   <nav class="container-xl px-6 grid grid-cols-10 gap-4 items-center h-14">
-    <a href="/" class="font-bold text-xl text-secondary-600 col-span-2">{name}</a>
+    <a href="/" class="font-bold text-xl text-secondary-600 col-span-2">{data.shop.name}</a>
 
     <div class="col-span-4 flex items-center justify-between h-full">
       <div class="h-5 w-px bg-lines self-end" />
@@ -51,7 +52,7 @@
     </div>
 
     <div class="border-t border-lines flex justify-between">
-      <span>Copyright 2023. {name}</span>
+      <span>Copyright 2023. {data.shop.name}</span>
       <a href="/legal">Легальні документи</a>
     </div>
   </div>

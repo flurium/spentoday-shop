@@ -2,7 +2,7 @@ import { call, callJson } from "$lib/fetch"
 import { error } from "@sveltejs/kit"
 import type { PageLoad } from "./$types"
 
-export const load = (async ({ fetch, url }) => {
+export const load: PageLoad = async ({ fetch, url }) => {
   const response = await call(fetch, {
     route: "/v1/shop/cart/test",
     method: "GET"
@@ -24,4 +24,4 @@ export const load = (async ({ fetch, url }) => {
     products: json,
     domain: url.hostname
   }
-}) satisfies PageLoad
+}
