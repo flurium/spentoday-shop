@@ -28,6 +28,6 @@
 </header>
 
 <Dialog class="flex justify-end items-start" bind:open={cartOpen}>
-  <CartDialogContent />
+  <CartDialogContent onClose={() => (cartOpen = false)} />
 </Dialog>
 <slot />
