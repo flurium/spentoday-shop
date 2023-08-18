@@ -11,9 +11,13 @@ type FetchInfo = {
 /**
  * Fetch public data from server. Support only JSON as body.
  */
-export async function call(fetch: Fetch, info: FetchInfo) {
+export async function call(fetchFunc: Fetch, info: FetchInfo) {
   try {
-    return await fetch(new URL(info.route, PUBLIC_API_URL), {
+    // console.log(info)
+    // console.log("==", fetchFunc == fetch)
+    // console.log("===", fetchFunc === fetch)
+
+    return await fetchFunc(new URL(info.route, PUBLIC_API_URL), {
       method: info.method,
       headers: {
         accept: "application/json",

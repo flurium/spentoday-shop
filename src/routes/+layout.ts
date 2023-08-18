@@ -21,7 +21,7 @@ export type LayoutShop = {
 }
 
 export const load: LayoutLoad = async ({ fetch, url }) => {
-  const domain = url.hostname
+  const domain = "free.spentoday.com" //url.hostname
 
   const response = await call(fetch, {
     route: `/v1/shop/${domain}/layout`,
