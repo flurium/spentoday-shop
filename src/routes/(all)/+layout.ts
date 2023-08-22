@@ -1,6 +1,7 @@
 import { call, callJson } from "$lib"
 import { error, redirect } from "@sveltejs/kit"
 import type { LayoutLoad } from "./$types"
+import { dev } from "$app/environment"
 
 /*
 
@@ -21,7 +22,7 @@ export type LayoutShop = {
 }
 
 export const load: LayoutLoad = async ({ fetch, url }) => {
-  const domain = "free.spentoday.com" //url.hostname
+  const domain = dev ? "free.spentoday.com" : url.hostname
 
   const response = await call(fetch, {
     route: `/v1/shop/${domain}/layout`,
