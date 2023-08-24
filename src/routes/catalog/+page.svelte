@@ -1,47 +1,77 @@
 <script lang="ts">
-  import { call, callJson } from "../../lib"
   import type { PageData } from "./$types"
-  import { onMount } from "svelte"
+  import { catalogProducts } from "$features/catalog"
+  import ScrollLoad from "$lib/components/ScrollLoad.svelte"
 
   export let data: PageData
 
-  let start: number
-  let count: number
+  let products = data.products
 
-  let products: Product[] | null
+  let search: string = ""
+  let start: number = data.start
 
-  type Product = {
-    id: string
-    name: string
-    price: number
-    isDraft: boolean
+  let isLoading = false
+
+  let timer: number
+
+  function debounceChange() {
+    clearTimeout(timer)
+    timer = setTimeout(catalog, 700)
   }
 
-  onMount(async () => {
-    products = await catalog()
-  })
-
   async function catalog() {
-    const response = await call(fetch, {
-      route: `/v1/shop/catalog/${data.domain}`,
-      method: "POST"
-    })
-    if (!response || !response.ok) return null
+    const response = await catalogProducts(data.domain, search, 0)
+    if (response == null) return
 
-    const json = await callJson<Product[]>(response)
-    return json
+    products = response
+    start = 0
+  }
+
+  async function loadMore(): Promise<"skip" | "stop" | "continue"> {
+    if (isLoading) return "skip"
+
+    isLoading = true
+    const response = await catalogProducts(data.domain, search, start)
+    if (response == null) {
+      isLoading = false
+      return "continue"
+    }
+    if (response.length == 0) return "stop"
+
+    products = [...products, ...response]
+    start += response.length
+
+    isLoading = false
+    return "continue"
   }
 </script>
 
-<div class="flex flex-col mt-8">
-  {#if products != null}
-    {#each products as product (product.id)}
-      <span>
-        {product.name}
-      </span>
-      <span>
-        {product.price}
-      </span>
-    {/each}
-  {/if}
+<div>
+  <input type="text" on:keyup={debounceChange} bind:value={search} placeholder="Search products" />
+
+  {#each products as product (product.id)}
+    <span>
+      {product.name}
+    </span>
+    <span>
+      {product.price}
+    </span>
+  {/each}
+  <ScrollLoad load={loadMore} />
 </div>
+
+<!-- {#if search.length > 0}
+    {#await catalog(search, start, count)}
+      <p>Loading...</p>
+    {:then productsData}
+      {#if productsData == null}
+      <p>No products found.</p>
+    {:else}
+      <script>
+        products = productsData;
+      </script>
+    {/if}
+    {:catch error}
+      <p>Error loading products.</p>
+    {/await}
+  {/if} -->
