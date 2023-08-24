@@ -1,5 +1,5 @@
-import { call, callJson } from "$lib"
-import { error, redirect } from "@sveltejs/kit"
+import { call, callJson, errors } from "$lib"
+import { redirect } from "@sveltejs/kit"
 import type { LayoutLoad } from "./$types"
 import { dev } from "$app/environment"
 
@@ -28,16 +28,13 @@ export const load: LayoutLoad = async ({ fetch, url }) => {
     route: `/v1/shop/${domain}/layout`,
     method: "GET"
   })
-  if (!response) throw error(500, { message: "Не можемо зв'язатися з сервером." })
+  if (!response) throw errors.serverError()
 
   if (response.ok) {
     const data = await callJson<LayoutShop>(response)
-    if (!data) throw error(500, { message: "Не можемо зв'язатися з сервером." })
-    return {
-      domain,
-      shop: data
-    }
+    if (!data) throw errors.jsonError()
+    return { domain, shop: data }
   }
   if (response.status == 404) throw redirect(302, "/not-found")
-  throw error(500, { message: "Не можемо зв'язатися з сервером." })
+  throw errors.serverError()
 }
