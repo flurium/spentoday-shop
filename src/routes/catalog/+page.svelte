@@ -2,6 +2,7 @@
   import type { PageData } from "./$types"
   import { catalogProducts } from "$features/catalog"
   import ScrollLoad from "$lib/components/ScrollLoad.svelte"
+  import { storageImageUrl } from "$lib"
 
   export let data: PageData
 
@@ -51,11 +52,12 @@
 
   {#each products as product (product.id)}
     <span>
-      {product.name}
+      Назва: {product.name}
     </span>
     <span>
-      {product.price}
+      Ціна: {product.price}
     </span>
+    <img src={product.image ? storageImageUrl(product.image) : undefined} alt="product-img" />
   {/each}
   <ScrollLoad load={loadMore} />
 </div>

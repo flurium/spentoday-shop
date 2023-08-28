@@ -1,9 +1,10 @@
-import { call, callJson } from "$lib"
+import { call, callJson, type StorageImage } from "$lib"
 
 export type Product = {
   id: string
   name: string
   price: number
+  image?: StorageImage
   isDraft: boolean
 }
 
