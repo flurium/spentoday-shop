@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { call, callJson } from "../../lib"
+  import { call, callJson } from "$lib"
   import type { PageData } from "./$types"
   import { onMount } from "svelte"
 
