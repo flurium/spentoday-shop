@@ -21,6 +21,7 @@
     <button on:click={onClose}><Close color="#3f3f46" class="w-8 h-8" /></button>
   </div>
 
+  
   {#if $cart.length > 0}
     <div
       class="grid grid-cols-[1fr_1fr_1fr_auto] place-items-center w-full
@@ -70,9 +71,9 @@
         <button on:click={() => remove(product.id)}><Close /></button>
       </div>
     {/each}
-
+    
     <div class="grid place-items-center">
-      <button class="rounded-full border border-lines py-6 mt-7 px-11">Оформити замовлення</button>
+      <a class="rounded-full border border-lines py-6 mt-7 px-11" href="/order"> Замовити</a>
     </div>
   {/if}
 </div>
