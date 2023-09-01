@@ -29,13 +29,13 @@
       }
     })
     if (!response) {
-      status = "no server response"
+      status = "Виникли проблеми з відправкою замовлення"
       return
     }
 
     if (response.ok) {
       cart.clear()
-      status = "order is sent"
+      status = "Замовлення відправлено"
     }
   }
   </script>

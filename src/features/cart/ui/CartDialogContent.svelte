@@ -73,7 +73,7 @@
     {/each}
     
     <div class="grid place-items-center">
-      <a href="/order"> Замовити</a>
+      <a class="rounded-full border border-lines py-6 mt-7 px-11" href="/order"> Замовити</a>
     </div>
   {/if}
 </div>
