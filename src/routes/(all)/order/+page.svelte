@@ -10,6 +10,7 @@
     let fullName:string = ""
     let postIndex:string = ""
     let comment:string = ""
+    let status:string = ""
     $: isInvalid = adress.trim() == "" || phone.trim() == "" || email.trim() == "" || fullName.trim() == "" || postIndex.trim() == "" || comment.trim() == ""
  
     async function order() {
@@ -27,16 +28,19 @@
         orders: orders
       }
     })
-    if (!response) return alert("no server response")
+    if (!response) {
+      status = "no server response"
+      return
+    }
 
     if (response.ok) {
       cart.clear()
-      console.log("order is sent")
-      return alert("orderis sent")
-
+      status = "order is sent"
     }
   }
   </script>
+
+<p class="font-bold text-secondary-600 text-2xl"> {status}</p>
 
 <form on:submit|preventDefault={order} class="max-w-lg m-auto flex flex-col gap-4 mt-2">
   <input

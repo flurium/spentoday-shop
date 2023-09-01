@@ -3,7 +3,6 @@
   import Plus from "./Plus.svelte"
   import Minus from "./Minus.svelte"
   import Close from "./Close.svelte"
-  import { goto } from "$app/navigation"
 
   export let onClose: () => void
 
@@ -74,7 +73,7 @@
     {/each}
     
     <div class="grid place-items-center">
-      <button  on:click= {() => goto('/order')} class="rounded-full border border-lines py-6 mt-7 px-11">Оформити замовлення</button>
+      <a href="/order"> Замовити</a>
     </div>
   {/if}
 </div>
