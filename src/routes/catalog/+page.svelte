@@ -15,6 +15,13 @@
 
   let start: number = data.start
 
+  enum order {
+    "-//-" = 0,
+    "Від дешевих до дорожчих",
+    "Від дорогих до дешевших"
+  }
+  let orderBy = order["-//-"]
+
   let isLoading = false
 
   let timer: number
@@ -27,7 +34,7 @@
   }
 
   async function catalog() {
-    const response = await catalogProducts(data.domain, search, 0, +min, +max)
+    const response = await catalogProducts(data.domain, search, 0, +min, +max, orderBy)
     if (response == null) return
 
     products = response
@@ -38,7 +45,7 @@
     if (isLoading) return "skip"
 
     isLoading = true
-    const response = await catalogProducts(data.domain, search, start, +min, +max)
+    const response = await catalogProducts(data.domain, search, start, +min, +max, orderBy)
     if (response == null) {
       isLoading = false
       return "continue"
@@ -47,7 +54,6 @@
 
     products = [...products, ...response]
     start += response.length
-    infinityScroll = false
 
     isLoading = false
     return "continue"
@@ -59,17 +65,33 @@
   <input type="number" on:keyup={debounceChange} bind:value={min} placeholder="Min price" />
   <input type="number" on:keyup={debounceChange} bind:value={max} placeholder="Max price" />
 
-  {#each products as product (product.id)}
-    <span>
-      Назва: {product.name}
-    </span>
-    <span>
-      Ціна: {product.price}
-    </span>
-    {#if product.image != null}
-      <img src={storageImageUrl(product.image)} alt="product-img" />
-    {/if}
-  {/each}
+  <select bind:value={orderBy} on:change={debounceChange}>
+    {#each [order["-//-"], order["Від дешевих до дорожчих"], order["Від дорогих до дешевших"]] as orderValue}
+      <option value={orderValue}>{order[orderValue]}</option>
+    {/each}
+  </select>
+
+  <ul>
+    {#each products as product (product.id)}
+      <li>
+        <span>
+          Назва: {product.name}
+        </span>
+        <span>
+          Ціна: {product.price}
+        </span>
+        {#if product.image != null}
+          <img
+            width="200px"
+            height="200px"
+            src={storageImageUrl(product.image)}
+            alt="product-img"
+          />
+        {/if}
+      </li>
+    {/each}
+  </ul>
+
   {#if !infinityScroll}
     <button on:click={() => (infinityScroll = true)}> Load More </button>
   {:else}

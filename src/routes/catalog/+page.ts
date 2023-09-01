@@ -19,7 +19,7 @@ export const load = (async ({ url }) => {
   const domain = getDomain(url)
   let start = getStart(url)
 
-  const response = await catalogProducts(domain, "", start, "0", "2147483647")
+  const response = await catalogProducts(domain, "", start)
   console.log(response)
   if (response == null) throw error(500, "Problem")
 

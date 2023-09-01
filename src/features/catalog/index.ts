@@ -12,7 +12,8 @@ export async function catalogProducts(
   search: string,
   start: number,
   min?: number,
-  max?: number
+  max?: number,
+  order?: number
 ) {
   const response = await call(fetch, {
     route: `/v1/shop/catalog/${domain}`,
@@ -21,7 +22,8 @@ export async function catalogProducts(
       search: search,
       start: start,
       min: min,
-      max: max
+      max: max,
+      order: order
     }
   })
   console.log(min, max)
