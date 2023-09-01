@@ -5,18 +5,26 @@ export type Product = {
   name: string
   price: number
   image?: StorageImage
-  isDraft: boolean
 }
 
-export async function catalogProducts(domain: string, search: string, start: number) {
+export async function catalogProducts(
+  domain: string,
+  search: string,
+  start: number,
+  min?: number,
+  max?: number
+) {
   const response = await call(fetch, {
     route: `/v1/shop/catalog/${domain}`,
     method: "POST",
     body: {
       search: search,
-      start: start
+      start: start,
+      min: min,
+      max: max
     }
   })
+  console.log(min, max)
 
   if (!response || !response.ok) return null
 

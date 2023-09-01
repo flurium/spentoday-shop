@@ -1,3 +1,5 @@
+import { dev } from "$app/environment"
+
 export * from "./fetch"
 
 export function fromJson<T>(str: string) {
@@ -14,4 +16,8 @@ export function toJson(data: any) {
   } catch {
     return null
   }
+}
+
+export function getDomain(url: URL) {
+  return dev ? "free.spentoday.com" : url.hostname
 }

@@ -1,6 +1,7 @@
 import { error } from "@sveltejs/kit"
 import type { PageLoad } from "./$types"
 import { catalogProducts } from "$features/catalog"
+import { getDomain } from "$lib"
 
 function getStart(url: URL) {
   const startParam = url.searchParams.get("start")
@@ -15,11 +16,11 @@ function getStart(url: URL) {
 }
 
 export const load = (async ({ url }) => {
-  const domain = url.hostname
-
+  const domain = getDomain(url)
   let start = getStart(url)
 
-  const response = await catalogProducts(domain, "", start)
+  const response = await catalogProducts(domain, "", start, "0", "2147483647")
+  console.log(response)
   if (response == null) throw error(500, "Problem")
 
   return {

@@ -9,11 +9,17 @@
   let products = data.products
 
   let search: string = ""
+
+  let min: string = ""
+  let max: string = ""
+
   let start: number = data.start
 
   let isLoading = false
 
   let timer: number
+
+  let infinityScroll = false
 
   function debounceChange() {
     clearTimeout(timer)
@@ -21,7 +27,7 @@
   }
 
   async function catalog() {
-    const response = await catalogProducts(data.domain, search, 0)
+    const response = await catalogProducts(data.domain, search, 0, +min, +max)
     if (response == null) return
 
     products = response
@@ -32,7 +38,7 @@
     if (isLoading) return "skip"
 
     isLoading = true
-    const response = await catalogProducts(data.domain, search, start)
+    const response = await catalogProducts(data.domain, search, start, +min, +max)
     if (response == null) {
       isLoading = false
       return "continue"
@@ -41,6 +47,7 @@
 
     products = [...products, ...response]
     start += response.length
+    infinityScroll = false
 
     isLoading = false
     return "continue"
@@ -49,6 +56,8 @@
 
 <div>
   <input type="text" on:keyup={debounceChange} bind:value={search} placeholder="Search products" />
+  <input type="number" on:keyup={debounceChange} bind:value={min} placeholder="Min price" />
+  <input type="number" on:keyup={debounceChange} bind:value={max} placeholder="Max price" />
 
   {#each products as product (product.id)}
     <span>
@@ -57,9 +66,15 @@
     <span>
       Ціна: {product.price}
     </span>
-    <img src={product.image ? storageImageUrl(product.image) : undefined} alt="product-img" />
+    {#if product.image != null}
+      <img src={storageImageUrl(product.image)} alt="product-img" />
+    {/if}
   {/each}
-  <ScrollLoad load={loadMore} />
+  {#if !infinityScroll}
+    <button on:click={() => (infinityScroll = true)}> Load More </button>
+  {:else}
+    <ScrollLoad load={loadMore} />
+  {/if}
 </div>
 
 <!-- {#if search.length > 0}
