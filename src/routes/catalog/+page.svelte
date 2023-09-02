@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { PageData } from "./$types"
-  import { catalogProducts } from "$features/catalog"
+  import { catalogProducts, type Product } from "$features/catalog"
   import ScrollLoad from "$lib/components/ScrollLoad.svelte"
   import { storageImageUrl } from "$lib"
 
@@ -37,8 +37,10 @@
     const response = await catalogProducts(data.domain, search, 0, +min, +max, orderBy)
     if (response == null) return
 
+    infinityScroll = false
+
     products = response
-    start = 0
+    start = products.length
   }
 
   async function loadMore(): Promise<"skip" | "stop" | "continue"> {
@@ -51,6 +53,8 @@
       return "continue"
     }
     if (response.length == 0) return "stop"
+
+    infinityScroll = false
 
     products = [...products, ...response]
     start += response.length
