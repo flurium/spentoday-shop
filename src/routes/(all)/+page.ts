@@ -6,22 +6,22 @@ export type ShopData = {
   id: string;
   name: string;
   topBanner: string;
-  categories: LayoutCategory[];
-  banners: LayoutBanner[];
-  products: LayoutProduct[];
+  categories: HomeCategory[];
+  banners: HomeBanner[];
+  products: HomeProduct[];
 };
 
-type LayoutCategory = {
+type HomeCategory = {
   id: string;
   name: string;
 } 
 
-export type LayoutBanner = {
+export type HomeBanner = {
   id: string;
   url: string;
 };
 
-export type LayoutProduct = {
+export type HomeProduct = {
   id: string;
   name: string;
   price: number;
@@ -32,7 +32,7 @@ export type LayoutProduct = {
 export const load = (async ({ fetch, url }) => {
   const domain = getDomain(url)
   const response = await call(fetch, {
-   route: `/v1/shop/${domain}/layout`, 
+   route: `/v1/shop/home/${domain}`, 
    method: "GET",
   })
 

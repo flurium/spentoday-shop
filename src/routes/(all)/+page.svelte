@@ -24,7 +24,7 @@
         <div
           class="product-card my-2 p-2 border rounded-md flex flex-col items-center w-[130%] h-[130%]"
         >
-          <img class="max-h-32 object-contain mb-2" src={`${product.image}`} alt="Product Image" />
+          <img class="max-h-32 object-contain mb-2" src={`${product.image}`} alt="Product" />
           <h3 class="text-center mt-2">{product.name}</h3>
           <p class="text-center">${product.price}</p>
         </div>
