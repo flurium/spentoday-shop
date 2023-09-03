@@ -19,6 +19,8 @@ export function toJson(data: any) {
   }
 }
 
+
 export function getDomain(url: URL ){
   return dev ? "free.spentoday.com" : url.hostname
 }
+
