@@ -43,7 +43,7 @@
 
     <div class="col-span-4 flex items-center justify-between h-full">
       <div class="h-5 w-px bg-lines self-end" />
-      <a href="/search" class="text-secondary-700 font-medium">КАТАЛОГ</a>
+      <a href="/catalog" class="text-secondary-700 font-medium">КАТАЛОГ</a>
       <a href="/about" class="text-secondary-500">ПРО НАС</a>
       <div class="h-5 w-px bg-lines self-end" />
     </div>
