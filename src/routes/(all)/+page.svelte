@@ -46,13 +46,13 @@
       <div class="categories mt-4">
         <h2 class="mt-4">Categories :</h2>
         <div
-          class="max-h-0 overflow-hidden transition-max-height duration-300 ease-in-out"
-          class:show-categories={showAllCategories}
+          class="max-h-0 overflow-hidden transition-max-height duration-300 ease-in-out
+          {showAllCategories ? 'max-h-[1000px]' : ''}"
         >
           <div class="flex flex-col items-center">
             {#each data.shopData.categories as category}
-                <p class="my-2">{category.name}</p>    
-           {/each}
+              <p class="my-2">{category.name}</p>
+            {/each}
           </div>
         </div>
         <button class="text-blue-500 cursor-pointer mt-2" on:click={toggleCategories}>
@@ -62,9 +62,3 @@
     </div>
   {/if}
 </div>
-
-<style>
-  .show-categories {
-    max-height: 1000px;
-  }
-</style>

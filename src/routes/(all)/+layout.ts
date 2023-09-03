@@ -28,16 +28,16 @@ export const load: LayoutLoad = async ({ fetch, url }) => {
     route: `/v1/shop/${domain}/layout`,
     method: "GET"
   })
-  console.log(response)
+  // console.log(response)
   if (!response) throw errors.serverError()
 
   if (response.ok) {
     const data = await callJson<LayoutShop>(response)
     if (!data) throw errors.jsonError()
-    console.log(data)
+    // console.log(data)
     return { domain, shop: data }
   }
   if (response.status == 404) throw redirect(302, "/not-found")
-  console.log("end")
+  // console.log("end")
   throw errors.serverError()
 }
