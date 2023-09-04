@@ -5,7 +5,7 @@
   import Close from "$features/cart/ui/Close.svelte"
   import { call, callJson } from "$lib/fetch"
   import type { PageData } from "../$types"
-    import { onMount } from "svelte"
+    import { goto } from "$app/navigation"
 
   export let data: PageData
   let adress: string = ""
@@ -14,8 +14,9 @@
   let fullName: string = ""
   let postIndex: string = ""
   let comment: string = ""
-  let status: string = ""
-  let summ: number = 0
+  let modal: HTMLDialogElement
+
+  $: summ = $cart.reduce((s, x) => s + x.price*x.amount, 0);
 
   $: isInvalid =
     adress.trim() == "" ||
@@ -26,7 +27,7 @@
     comment.trim() == ""
 
   async function order() {
-    const orders = $cart
+    const products = $cart
     const response = await call(fetch, {
       route: `/v1/shop/order/${data.domain}/new`,
       method: "POST",
@@ -37,46 +38,63 @@
         fullName: fullName,
         postIndex: postIndex,
         comment: comment,
-        orders: orders
+        products: products
       }
     })
     if (!response) {
-      status = "Виникли проблеми з відправкою замовлення"
       return
     }
 
     if (response.ok) {
       cart.clear()
-      status = "Замовлення відправлено"
+      modal.showModal()
     }
-  }
-
-  function Summ() {
-    summ = 0
-     $cart.forEach((x)=> summ += (x.amount*x.price) )
   }
 
   function changeAmount(id: string, num: number) {
     cart.changeAmount(id, num)
-    Summ()
   }
 
   function remove(id: string) {
     cart.remove(id)
-    Summ()
   }
-  onMount(async () => {
-    Summ()
-  })
+
+  function exit() {
+   modal.close()
+   goto("/")
+  }
 </script>
+
+
+<dialog bind:this={modal} class="p-10 bg-white rounded-md">
+  <div class="flex flex-col"> 
+    <div class="text-3xl center mx-auto">
+     ДЯКУЄМО ЗА ЗАМОВЛЕННЯ
+    </div><br />
+    <div class="text-sm center mx-auto">
+      Оплата пройшла успішно, очікуйте на отримання товару.<br />
+      Якщо виникнуть проблеми будь ласка, звяжіться з нами
+    </div><br />
+
+    <button
+      class="bg-yellow-400 w-2/5 mx-auto hover:bg-yellow-300 font-semibold px-6 py-3 rounded-full"
+      on:click={() => exit()}
+      type="submit">
+        На головну
+    </button>
+  </div>
+   
+</dialog>
+
+
+
 
   <div class="mt-16">
     <div class="flex flex-row">
-      <div class="basis-2/3 ms-16">
+      <div class="basis-1/2 ms-16">
         <span class="mb-10 text-5xl font-bold max-w-lg flex flex-col gap-4 text-transform: uppercase">
           Оформлення
          </span>
-        <p class="font-bold text-secondary-600 text-2xl">{status}</p>
           <div class="mb-10 w-full text-2xl font-extrabold border-b-2 border-gray-400">
             <span class="bg-yellow rounded-full">1</span>
             <span class="">
@@ -132,7 +150,7 @@
           </div>
         </div>
         
-      <div class="basis-1/3 m-11">
+      <div class="basis-1/2 m-11">
         <div class="bg-white p-6">
           <span class="mb-4 text-xl font-bold">
             Ваше замовлення
