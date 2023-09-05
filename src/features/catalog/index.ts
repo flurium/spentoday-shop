@@ -26,7 +26,6 @@ export async function catalogProducts(
       order: order
     }
   })
-  console.log(min, max)
 
   if (!response || !response.ok) return null
 

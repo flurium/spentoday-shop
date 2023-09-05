@@ -2,7 +2,7 @@
   import "../app.css"
 </script>
 
-<header class="border-b border-b-lines">
+<!-- <header class="border-b border-b-lines">
   <nav class="container-xl px-6 grid grid-cols-10 gap-4 items-center h-14">
     <a href="/" class="font-bold text-xl text-secondary-600 col-span-2">{data.shop.name}</a>
 
@@ -22,6 +22,6 @@
 
 <Dialog class="flex justify-end items-start" bind:open={cartOpen}>
   <CartDialogContent onClose={() => (cartOpen = false)} />
-</Dialog>
+</Dialog> -->
 
 <slot />
