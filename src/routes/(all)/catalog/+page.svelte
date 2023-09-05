@@ -9,8 +9,6 @@
   let products = data.products
 
   let search = ""
-  let min = ""
-  let max = ""
   let start = data.start
 
   enum order {
@@ -25,6 +23,16 @@
   let timer: number
 
   let infinityScroll = false
+
+  let minPrice = products[0].price
+  let maxPrice = minPrice
+  for (let i = 1; i < products.length; i++) {
+    if (products[i].price > maxPrice) maxPrice = products[i].price
+    if (products[i].price < minPrice) minPrice = products[i].price
+  }
+
+  let min = minPrice.toString()
+  let max = maxPrice.toString()
 
   function debounceChange() {
     clearTimeout(timer)
@@ -64,8 +72,22 @@
 
 <div>
   <input type="text" on:keyup={debounceChange} bind:value={search} placeholder="Search products" />
-  <input type="number" min="0" on:keyup={debounceChange} bind:value={min} placeholder="Min price" />
-  <input type="number" min="0" on:keyup={debounceChange} bind:value={max} placeholder="Max price" />
+  <input
+    type="number"
+    on:keyup={debounceChange}
+    bind:value={min}
+    min={minPrice}
+    max={maxPrice}
+    placeholder="Min price"
+  />
+  <input
+    type="number"
+    on:keyup={debounceChange}
+    bind:value={max}
+    min={minPrice}
+    max={maxPrice}
+    placeholder="Max price"
+  />
 
   <select bind:value={orderBy} on:change={debounceChange}>
     {#each [order["-//-"], order["Від дешевих до дорожчих"], order["Від дорогих до дешевших"]] as orderValue}
