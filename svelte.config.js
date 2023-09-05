@@ -16,6 +16,11 @@ const config = {
     }),
     alias: {
       $features: "src/features"
+    },
+    files: {
+      hooks: {
+        server: "src/lib/hooks.server"
+      }
     }
   }
 }

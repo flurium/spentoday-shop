@@ -1,6 +1,7 @@
 import { dev } from "$app/environment"
 
 export * from "./fetch"
+export * as errors from "./errors"
 
 export function fromJson<T>(str: string) {
   try {

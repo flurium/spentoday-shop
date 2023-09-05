@@ -72,7 +72,7 @@
     {/each}
 
     <div class="grid place-items-center">
-      <button class="rounded-full border border-lines py-6 mt-7 px-11">Оформити замовлення</button>
+      <a class="rounded-full border border-lines py-6 mt-7 px-11" href="/order"> Замовити</a>
     </div>
   {/if}
 </div>

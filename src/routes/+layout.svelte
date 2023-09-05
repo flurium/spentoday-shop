@@ -1,15 +1,5 @@
 <script lang="ts">
   import "../app.css"
-  import { CartDialogContent, CartIcon } from "$features/cart"
-  import Dialog from "$lib/components/Dialog.svelte"
-  import type { LayoutData } from "./$types"
-
-  export let data: LayoutData
-
-  let cartOpen = false
-  function toggleCartDialog() {
-    cartOpen = !cartOpen
-  }
 </script>
 
 <header class="border-b border-b-lines">
@@ -35,25 +25,3 @@
 </Dialog>
 
 <slot />
-
-<footer class="bg-white border-t border-lines pt-16 pb-12">
-  <div class="container-xl px-6">
-    <div class="grid grid-cols-3 gap-4 place-items-center">
-      <div class="justify-self-start">
-        <h3 class="font-bold text-secondary-500 text-2xl">НАША РОЗСИЛКА</h3>
-      </div>
-      <div class="flex gap-2">
-        <span>Каталог</span>
-        <span>Про нас</span>
-      </div>
-      <div class="justify-self-end flex flex-col">
-        <span class="text-secondary-400">КОНТАКТИ</span>
-      </div>
-    </div>
-
-    <div class="border-t border-lines flex justify-between">
-      <span>Copyright 2023. {data.shop.name}</span>
-      <a href="/legal">Легальні документи</a>
-    </div>
-  </div>
-</footer>
