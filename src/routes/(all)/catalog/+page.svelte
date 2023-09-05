@@ -64,8 +64,8 @@
 
 <div>
   <input type="text" on:keyup={debounceChange} bind:value={search} placeholder="Search products" />
-  <input type="number" on:keyup={debounceChange} bind:value={min} placeholder="Min price" />
-  <input type="number" on:keyup={debounceChange} bind:value={max} placeholder="Max price" />
+  <input type="number" min="0" on:keyup={debounceChange} bind:value={min} placeholder="Min price" />
+  <input type="number" min="0" on:keyup={debounceChange} bind:value={max} placeholder="Max price" />
 
   <select bind:value={orderBy} on:change={debounceChange}>
     {#each [order["-//-"], order["Від дешевих до дорожчих"], order["Від дорогих до дешевших"]] as orderValue}
@@ -95,7 +95,7 @@
   </ul>
 
   {#if !infinityScroll}
-    <button on:click={() => (infinityScroll = true)}> Load More </button>
+    <button on:click={() => (infinityScroll = true)}>Load More</button>
   {:else}
     <ScrollLoad load={loadMore} />
   {/if}
