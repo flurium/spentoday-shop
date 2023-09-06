@@ -1,4 +1,4 @@
-import { call, callJson, errors } from "$lib"
+import { call, callJson, getDomain, errors } from "$lib"
 import { redirect } from "@sveltejs/kit"
 import type { LayoutLoad } from "./$types"
 import { dev } from "$app/environment"
@@ -22,19 +22,22 @@ export type LayoutShop = {
 }
 
 export const load: LayoutLoad = async ({ fetch, url }) => {
-  const domain = dev ? "free.spentoday.com" : url.hostname
+  const domain = getDomain(url)
 
   const response = await call(fetch, {
     route: `/v1/shop/${domain}/layout`,
     method: "GET"
   })
+  // console.log(response)
   if (!response) throw errors.serverError()
 
   if (response.ok) {
     const data = await callJson<LayoutShop>(response)
     if (!data) throw errors.jsonError()
+    // console.log(data)
     return { domain, shop: data }
   }
   if (response.status == 404) throw redirect(302, "/not-found")
+  // console.log("end")
   throw errors.serverError()
 }
