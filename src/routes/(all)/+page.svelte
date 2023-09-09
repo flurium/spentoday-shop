@@ -3,33 +3,32 @@
 
   export let data: PageData
 
-  let products = data.shopData.products;
+  let products = data.shopData.products
 
-  let banners = data.shopData.banners;
-  const numVisibleBanners = 4;
-  let startIndexBanners = 0;
+  let banners = data.shopData.banners
+  const numVisibleBanners = 4
+  let startIndexBanners = 0
 
-  let arrowsVisible = false;
+  let arrowsVisible = false
 
   function showArrows() {
-    arrowsVisible = true;
+    arrowsVisible = true
   }
 
   function hideArrows() {
-    arrowsVisible = false;
+    arrowsVisible = false
   }
 
   function scrollItems(startIndex: number, numVisible: number, items: any[], delta: number) {
-    startIndex += delta;
+    startIndex += delta
     if (startIndex < 0) {
-      startIndex = Math.max(0, items.length - (items.length % numVisible));
+      startIndex = Math.max(0, items.length - (items.length % numVisible))
     } else if (startIndex >= items.length) {
-      startIndex = 0;
+      startIndex = 0
     }
-    return startIndex;
+    return startIndex
   }
 </script>
-
 
 {#if data.shopData.topBanner != null}
 <div class="pb-12 mb-20">
@@ -70,8 +69,15 @@
 </div>
 </div>
 
-
-<div class="w-full relative overflow-hidden pb-1/3 flex items-center justify-center mt-20" role="region" aria-label="Banner Carousel" on:mouseover={showArrows} on:mouseout={hideArrows} on:focus={showArrows} on:blur={hideArrows}>
+<div
+  class="w-full relative overflow-hidden pb-1/3 flex items-center justify-center mt-20"
+  role="region"
+  aria-label="Banner Carousel"
+  on:mouseover={showArrows}
+  on:mouseout={hideArrows}
+  on:focus={showArrows}
+  on:blur={hideArrows}
+>
   <div class="relative mt-20">
      <div class="flex items-center justify-center">
   <div class="w-full overflow-x-hidden overflow-y-hidden mx-12"> 
@@ -82,6 +88,7 @@
           </div>
         {/each}
       </div>
+      <div />
     </div>
     <div>
       </div>
@@ -112,4 +119,3 @@
     </ul>
   </div>
 </div>
-
