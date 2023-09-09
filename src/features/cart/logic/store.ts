@@ -1,7 +1,12 @@
 import { browser } from "$app/environment"
 import { writable } from "svelte/store"
 import { apiCartProducts } from "./api"
-import { localCartKey, localCartProducts, removeLocalProduct, setLocalProduct } from "./local"
+import {
+  localCartKey,
+  localCartProducts,
+  removeLocalProduct,
+  setLocalProduct
+} from "./local"
 import { storageImageUrl } from "$lib"
 
 type CartProduct = {
