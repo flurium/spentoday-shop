@@ -43,7 +43,7 @@
   />
 {/if}
 
-<div class="flex justify-between px-12 pb-10">
+<div class="flex justify-between items-end px-12 pb-10">
   <h2 class="text-5xl font-extrabold text-secondary-700">ПОПУЛЯРНІ ПРОДУКТИ</h2>
   <a href="/catalog" class="flex gap-4 items-center">
     <span class="text-lg font-semibold text-secondary-600">Більше</span>
@@ -133,32 +133,28 @@
   </div>
 </div>
 
-<div class="flex flex-col my-11 pt-12">
-  <div class="categories mt-4 grid grid-cols-2 mx-12">
-    <div class="text-left">
-      <h2 class="font-inter text-5xl font-extrabold leading-40 text-gray-600">
-        ПОПУЛЯРНІ<br />КАТЕГОРІЇ
-      </h2>
-    </div>
-    <ul class="list-none mt-12 col-span-1">
-      {#each data.shopData.categories as category, i}
-        <li class="text-gray-600 relative pl-2">
-          <div class="mt-3">
-            <span class=" text-xl italic leading-24 text-gray-600">
-              {i > 9 ? { i } : String(i + 1).padStart(2, "0")}
-            </span>
-            <span
-              class="font-inter text-2xl font-semibold leading-32 text-gray-600"
-              >&nbsp;{category.name}</span
-            >
-          </div>
-          <span
-            class="absolute right-0 top-0 bottom-1 font-inter text-2xl text-gray-500"
-            >&#129125;</span
-          >
-          <div class="w-full border-b border-gray-400 relative mt-1" />
-        </li>
-      {/each}
-    </ul>
+<section class="my-32 mx-12 grid grid-cols-1 md:grid-cols-2 text-secondary-600">
+  <div>
+    <h2 class="text-5xl font-extrabold">
+      ПОПУЛЯРНІ<br />КАТЕГОРІЇ
+    </h2>
   </div>
-</div>
+  <ul class="mt-10">
+    {#each data.shopData.categories as category, i}
+      <li
+        class="py-3 border-b border-b-secondary-400
+        flex justify-between items-center"
+      >
+        <div>
+          <span class="text-xl italic">
+            {i > 9 ? { i } : String(i + 1).padStart(2, "0")}
+          </span>
+          <span class="text-2xl ml-4 font-semibold">
+            {category.name}
+          </span>
+        </div>
+        <span class="text-2xl">&#129125;</span>
+      </li>
+    {/each}
+  </ul>
+</section>
