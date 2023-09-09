@@ -48,7 +48,10 @@
 
 <p class="font-bold text-secondary-600 text-2xl">{status}</p>
 
-<form on:submit|preventDefault={order} class="max-w-lg m-auto flex flex-col gap-4 mt-2">
+<form
+  on:submit|preventDefault={order}
+  class="max-w-lg m-auto flex flex-col gap-4 mt-2"
+>
   <input
     class="bg-gray-100 focus:bg-gray-50 px-6 py-4 rounded-md border border-gray-200"
     bind:value={fullName}

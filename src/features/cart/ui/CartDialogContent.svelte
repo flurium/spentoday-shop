@@ -17,8 +17,11 @@
 
 <div class="w-full max-w-5xl m-12 bg-white p-12">
   <div class="flex justify-between">
-    <h3 class="text-4xl text-secondary-700 font-bold">КОШИК ({$cart.length})</h3>
-    <button on:click={onClose}><Close color="#3f3f46" class="w-8 h-8" /></button>
+    <h3 class="text-4xl text-secondary-700 font-bold">
+      КОШИК ({$cart.length})
+    </h3>
+    <button on:click={onClose}><Close color="#3f3f46" class="w-8 h-8" /></button
+    >
   </div>
 
   {#if $cart.length > 0}
@@ -39,7 +42,11 @@
       >
         <div class="flex gap-3 items-center">
           {#if product.image}
-            <img class="h-32 w-32 border border-lines" src={product.image} alt={product.name} />
+            <img
+              class="h-32 w-32 border border-lines"
+              src={product.image}
+              alt={product.name}
+            />
           {/if}
           <h4 class="font-semibold text-secondary-700">{product.name}</h4>
         </div>
@@ -72,7 +79,9 @@
     {/each}
 
     <div class="grid place-items-center">
-      <a class="rounded-full border border-lines py-6 mt-7 px-11" href="/order"> Замовити</a>
+      <a class="rounded-full border border-lines py-6 mt-7 px-11" href="/order">
+        Замовити</a
+      >
     </div>
   {/if}
 </div>
