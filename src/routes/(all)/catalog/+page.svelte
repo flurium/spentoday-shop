@@ -8,8 +8,8 @@
 
   let products = data.products
 
-  let search = ""
-  let start = data.start
+  let search: string = ""
+  let start: number = data.start
 
   enum order {
     "-//-" = 0,
@@ -31,8 +31,8 @@
     if (products[i].price < minPrice) minPrice = products[i].price
   }
 
-  let min = minPrice.toString()
-  let max = maxPrice.toString()
+  let min: string = minPrice.toString()
+  let max: string = maxPrice.toString()
 
   function debounceChange() {
     clearTimeout(timer)
