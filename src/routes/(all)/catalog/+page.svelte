@@ -31,9 +31,6 @@
     if (products[i].price < minPrice) minPrice = products[i].price
   }
 
-  let min = minPrice.toString()
-  let max = maxPrice.toString()
-
   function debounceChange() {
     clearTimeout(timer)
     timer = setTimeout(catalog, 700)
@@ -44,8 +41,8 @@
       data.domain,
       search,
       0,
-      +min,
-      +max,
+      minPrice,
+      maxPrice,
       orderBy
     )
     if (response == null) return
@@ -64,8 +61,8 @@
       data.domain,
       search,
       start,
-      +min,
-      +max,
+      minPrice,
+      maxPrice,
       orderBy
     )
     if (response == null) {
@@ -89,23 +86,21 @@
     type="text"
     on:keyup={debounceChange}
     bind:value={search}
-    placeholder="Search products"
+    placeholder="Пошук продуктів"
   />
   <input
     type="number"
     on:keyup={debounceChange}
-    bind:value={min}
-    min={minPrice}
+    bind:value={minPrice}
     max={maxPrice}
-    placeholder="Min price"
+    placeholder="Мінімальна ціна"
   />
   <input
     type="number"
     on:keyup={debounceChange}
-    bind:value={max}
+    bind:value={maxPrice}
     min={minPrice}
-    max={maxPrice}
-    placeholder="Max price"
+    placeholder="Максимальна ціна"
   />
 
   <select bind:value={orderBy} on:change={debounceChange}>
