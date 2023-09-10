@@ -88,10 +88,14 @@
 <div class="mt-16">
   <div class="flex flex-row">
     <div class="basis-1/2 ms-16">
-      <span class="mb-10 text-5xl font-bold max-w-lg flex flex-col gap-4 text-transform: uppercase">
+      <span
+        class="mb-10 text-5xl font-bold max-w-lg flex flex-col gap-4 text-transform: uppercase"
+      >
         Оформлення
       </span>
-      <div class="mb-10 w-full text-2xl font-extrabold border-b-2 border-gray-400">
+      <div
+        class="mb-10 w-full text-2xl font-extrabold border-b-2 border-gray-400"
+      >
         <span class="bg-yellow rounded-full">1</span>
         <span class=""> Контакна інформація</span>
       </div>
@@ -113,7 +117,9 @@
           placeholder="номер телефону"
         />
       </div>
-      <div class="mb-10 w-full text-2xl font-extrabold border-b-2 border-gray-400">
+      <div
+        class="mb-10 w-full text-2xl font-extrabold border-b-2 border-gray-400"
+      >
         <span class="mb-5 rounded-full">2</span>
         Деталі доставки
       </div>
@@ -134,7 +140,8 @@
           placeholder="Залиште свій коментар для замовлення"
         />
         <button
-          class="bg-yellow-400 disabled:bg-yellow-500 hover:bg-yellow-300 font-semibold px-6 py-3 rounded-full"
+          class="bg-yellow-400 disabled:bg-secondary-300 hover:bg-yellow-300
+          font-semibold px-6 py-3 rounded-full"
           on:click={() => order()}
           type="submit"
           disabled={isInvalid}
@@ -154,7 +161,11 @@
           >
             <div class="flex gap-3 items-center">
               {#if product.image}
-                <img class="h-32 w-32 border border-lines" src={product.image} alt={product.name} />
+                <img
+                  class="h-32 w-32 border border-lines"
+                  src={product.image}
+                  alt={product.name}
+                />
               {/if}
               <h4 class="font-semibold text-secondary-700">{product.name}</h4>
             </div>

@@ -40,7 +40,14 @@
   }
 
   async function catalog() {
-    const response = await catalogProducts(data.domain, search, 0, +min, +max, orderBy)
+    const response = await catalogProducts(
+      data.domain,
+      search,
+      0,
+      +min,
+      +max,
+      orderBy
+    )
     if (response == null) return
 
     infinityScroll = false
@@ -53,7 +60,14 @@
     if (isLoading) return "skip"
 
     isLoading = true
-    const response = await catalogProducts(data.domain, search, start, +min, +max, orderBy)
+    const response = await catalogProducts(
+      data.domain,
+      search,
+      start,
+      +min,
+      +max,
+      orderBy
+    )
     if (response == null) {
       isLoading = false
       return "continue"
@@ -71,7 +85,12 @@
 </script>
 
 <div>
-  <input type="text" on:keyup={debounceChange} bind:value={search} placeholder="Search products" />
+  <input
+    type="text"
+    on:keyup={debounceChange}
+    bind:value={search}
+    placeholder="Search products"
+  />
   <input
     type="number"
     on:keyup={debounceChange}

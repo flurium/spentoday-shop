@@ -8,7 +8,10 @@ export type LocalCartProduct = {
 const cartPrefix = "cart-"
 
 export function setLocalProduct(product: LocalCartProduct) {
-  localStorage.setItem(`${cartPrefix}${product.id}`, JSON.stringify({ amount: product.amount }))
+  localStorage.setItem(
+    `${cartPrefix}${product.id}`,
+    JSON.stringify({ amount: product.amount })
+  )
 }
 
 export function removeLocalProduct(id: string) {

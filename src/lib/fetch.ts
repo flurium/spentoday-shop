@@ -1,6 +1,9 @@
 import { PUBLIC_API_URL, PUBLIC_STORJ_SHOPS_KEY } from "$env/static/public"
 
-type Fetch = (input: RequestInfo | URL, init?: RequestInit | undefined) => Promise<Response>
+type Fetch = (
+  input: RequestInfo | URL,
+  init?: RequestInit | undefined
+) => Promise<Response>
 
 type FetchInfo = {
   route: `/${string}`
