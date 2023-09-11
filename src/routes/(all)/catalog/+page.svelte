@@ -83,12 +83,14 @@
 
 <div>
   <input
+    class="flex-1 bg-gray-100 focus:bg-gray-50 px-6 py-3 rounded-md border border-gray-200"
     type="text"
     on:keyup={debounceChange}
     bind:value={search}
     placeholder="Пошук продуктів"
   />
   <input
+    class="flex-1 bg-gray-100 focus:bg-gray-50 px-6 py-3 rounded-md border border-gray-200"
     type="number"
     on:keyup={debounceChange}
     bind:value={minPrice}
@@ -96,6 +98,7 @@
     placeholder="Мінімальна ціна"
   />
   <input
+    class="flex-1 bg-gray-100 focus:bg-gray-50 px-6 py-3 rounded-md border border-gray-200"
     type="number"
     on:keyup={debounceChange}
     bind:value={maxPrice}
@@ -103,13 +106,17 @@
     placeholder="Максимальна ціна"
   />
 
-  <select bind:value={orderBy} on:change={debounceChange}>
+  <select
+    class="bg-gray-100 block w-full focus:bg-gray-50 px-6 py-3 rounded-md border border-gray-200"
+    bind:value={orderBy}
+    on:change={debounceChange}
+  >
     {#each [order["-//-"], order["Від дешевих до дорожчих"], order["Від дорогих до дешевших"]] as orderValue}
       <option value={orderValue}>{order[orderValue]}</option>
     {/each}
   </select>
 
-  <ul>
+  <ul class="list-decimal">
     {#each products as product (product.id)}
       <li>
         <span>
