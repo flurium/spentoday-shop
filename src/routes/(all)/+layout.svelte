@@ -61,7 +61,7 @@
 </header>
 
 <Dialog class="flex justify-end items-start" bind:open={cartOpen}>
-  <CartDialogContent onClose={() => (cartOpen = false)} />
+  <CartDialogContent close={() => (cartOpen = false)} />
 </Dialog>
 
 <slot />

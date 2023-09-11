@@ -22,7 +22,7 @@
   <!-- svelte-ignore a11y-no-static-element-interactions -->
   <div
     bind:this={backElement}
-    class="absolute top-0 bottom-0 left-0 right-0 z-10 w-full min-h-full h-max
+    class="absolute z-10 w-full top-0 bottom-0
      bg-secondary-700 bg-opacity-75 {className}"
     on:click={clickOutside}
     on:keyup={escape}

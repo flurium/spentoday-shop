@@ -4,7 +4,7 @@
   import Minus from "./Minus.svelte"
   import Close from "./Close.svelte"
 
-  export let onClose: () => void
+  export let close: () => void
 
   function changeAmount(id: string, num: number) {
     cart.changeAmount(id, num)
@@ -20,8 +20,7 @@
     <h3 class="text-4xl text-secondary-700 font-bold">
       КОШИК ({$cart.length})
     </h3>
-    <button on:click={onClose}><Close color="#3f3f46" class="w-8 h-8" /></button
-    >
+    <button on:click={close}><Close color="#3f3f46" class="w-8 h-8" /></button>
   </div>
 
   {#if $cart.length > 0}
@@ -79,9 +78,13 @@
     {/each}
 
     <div class="grid place-items-center">
-      <a class="rounded-full border border-lines py-6 mt-7 px-11" href="/order">
-        Замовити</a
+      <a
+        class="rounded-full border border-lines py-6 mt-7 px-11"
+        href="/order"
+        on:click={close}
       >
+        Замовити
+      </a>
     </div>
   {/if}
 </div>
