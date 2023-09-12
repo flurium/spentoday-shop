@@ -82,43 +82,45 @@
 </script>
 
 <div>
-  <input
-    class="flex-1 bg-gray-100 focus:bg-gray-50 px-6 py-3 rounded-md border border-gray-200"
-    type="text"
-    on:keyup={debounceChange}
-    bind:value={search}
-    placeholder="Пошук продуктів"
-  />
-  <input
-    class="flex-1 bg-gray-100 focus:bg-gray-50 px-6 py-3 rounded-md border border-gray-200"
-    type="number"
-    on:keyup={debounceChange}
-    bind:value={minPrice}
-    max={maxPrice}
-    placeholder="Мінімальна ціна"
-  />
-  <input
-    class="flex-1 bg-gray-100 focus:bg-gray-50 px-6 py-3 rounded-md border border-gray-200"
-    type="number"
-    on:keyup={debounceChange}
-    bind:value={maxPrice}
-    min={minPrice}
-    placeholder="Максимальна ціна"
-  />
+  <div class="flex">
+    <input
+      class="w-1/2 bg-gray-100 focus:bg-gray-50 px-6 py-3 mr-6 rounded-md border border-gray-200"
+      type="text"
+      on:keyup={debounceChange}
+      bind:value={search}
+      placeholder="Пошук продуктів"
+    />
+    <input
+      class=" bg-gray-100 focus:bg-gray-50 px-6 py-3 mx-6 rounded-md border border-gray-200"
+      type="number"
+      on:keyup={debounceChange}
+      bind:value={minPrice}
+      max={maxPrice}
+      placeholder="Мінімальна ціна"
+    />
+    <input
+      class=" bg-gray-100 focus:bg-gray-50 px-6 py-3 mx-6 rounded-md border border-gray-200"
+      type="number"
+      on:keyup={debounceChange}
+      bind:value={maxPrice}
+      min={minPrice}
+      placeholder="Максимальна ціна"
+    />
 
-  <select
-    class="bg-gray-100 block w-full focus:bg-gray-50 px-6 py-3 rounded-md border border-gray-200"
-    bind:value={orderBy}
-    on:change={debounceChange}
-  >
-    {#each [order["-//-"], order["Від дешевих до дорожчих"], order["Від дорогих до дешевших"]] as orderValue}
-      <option value={orderValue}>{order[orderValue]}</option>
-    {/each}
-  </select>
+    <select
+      class="w-1/6 bg-gray-100 block focus:bg-gray-50 px-6 py-3 ml-6 rounded-md border border-gray-200"
+      bind:value={orderBy}
+      on:change={debounceChange}
+    >
+      {#each [order["-//-"], order["Від дешевих до дорожчих"], order["Від дорогих до дешевших"]] as orderValue}
+        <option value={orderValue}>{order[orderValue]}</option>
+      {/each}
+    </select>
+  </div>
 
-  <ul class="list-decimal">
+  <div class="grid grid-cols-5 gap-4">
     {#each products as product (product.id)}
-      <li>
+      <div>
         <span>
           Назва: {product.name}
         </span>
@@ -133,9 +135,9 @@
             alt="product-img"
           />
         {/if}
-      </li>
+      </div>
     {/each}
-  </ul>
+  </div>
 
   {#if !infinityScroll}
     <button on:click={() => (infinityScroll = true)}>Load More</button>
@@ -143,19 +145,3 @@
     <ScrollLoad load={loadMore} />
   {/if}
 </div>
-
-<!-- {#if search.length > 0}
-    {#await catalog(search, start, count)}
-      <p>Loading...</p>
-    {:then productsData}
-      {#if productsData == null}
-      <p>No products found.</p>
-    {:else}
-      <script>
-        products = productsData;
-      </script>
-    {/if}
-    {:catch error}
-      <p>Error loading products.</p>
-    {/await}
-  {/if} -->
