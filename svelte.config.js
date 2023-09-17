@@ -1,5 +1,5 @@
-import adapter from "@sveltejs/adapter-vercel";
-import { vitePreprocess } from "@sveltejs/kit/vite";
+import adapter from "@sveltejs/adapter-vercel"
+import { vitePreprocess } from "@sveltejs/kit/vite"
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
@@ -16,8 +16,13 @@ const config = {
     }),
     alias: {
       $features: "src/features"
+    },
+    files: {
+      hooks: {
+        server: "src/lib/hooks.server"
+      }
     }
   }
-};
+}
 
-export default config;
+export default config

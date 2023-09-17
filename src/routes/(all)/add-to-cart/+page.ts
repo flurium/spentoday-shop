@@ -1,13 +1,13 @@
 import { call, callJson } from "$lib/fetch"
-import { error } from "@sveltejs/kit"
 import type { PageLoad } from "./$types"
+import { errors } from "$lib"
 
-export const load = (async ({ fetch, url }) => {
+export const load: PageLoad = async ({ fetch, url }) => {
   const response = await call(fetch, {
     route: "/v1/shop/cart/test",
     method: "GET"
   })
-  if (response == null || !response.ok) throw error(500, "BAd")
+  if (response == null || !response.ok) throw errors.serverError()
 
   const json = await callJson<
     {
@@ -18,10 +18,10 @@ export const load = (async ({ fetch, url }) => {
       shopId: string
     }[]
   >(response)
-  if (json == null) throw error(500, "BAd")
+  if (json == null) throw errors.jsonError()
 
   return {
     products: json,
     domain: url.hostname
   }
-}) satisfies PageLoad
+}

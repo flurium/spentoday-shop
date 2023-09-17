@@ -1,14 +1,16 @@
-import { call, callJson } from "$lib";
+import { call, callJson } from "$lib"
+import type { StorageImage as StorageFile } from "$lib"
 
 export type ApiCartProduct = {
-  id: string;
-  name: string;
-  price: number;
-};
+  id: string
+  name: string
+  price: number
+  image?: StorageFile
+}
 
 function hostname() {
   // because we can't use page store
-  return window.location.hostname;
+  return window.location.hostname
 }
 
 export async function apiCartProducts(productIds: string[]) {
@@ -19,9 +21,9 @@ export async function apiCartProducts(productIds: string[]) {
       domain: hostname(),
       ids: productIds
     }
-  });
-  if (response == null || !response.ok) return null;
+  })
+  if (response == null || !response.ok) return null
 
-  const json = await callJson<ApiCartProduct[]>(response);
-  return json;
+  const json = await callJson<ApiCartProduct[]>(response)
+  return json
 }
