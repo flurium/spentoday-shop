@@ -1,8 +1,10 @@
 <script lang="ts">
   import type { PageData } from "./$types"
-  import { catalogProducts } from "$features/catalog"
+  import { catalogProducts
+  ,type Product } from "$features/catalog"
   import ScrollLoad from "$lib/components/ScrollLoad.svelte"
   import { storageImageUrl } from "$lib"
+  import { goto } from "$app/navigation"
 
   export let data: PageData
 
@@ -79,6 +81,11 @@
     isLoading = false
     return "continue"
   }
+
+    export async function singleProduct(slug: string, id:string){
+        if(slug == "") goto(`/catalog/${id}?SlugOrId=${id}`)
+        goto(`/catalog/${slug}?SlugOrId=${slug}`)
+    }
 </script>
 
 <div>
@@ -135,6 +142,7 @@
             alt="product-img"
           />
         {/if}
+        <button on:click={()=> singleProduct(product.slug, product.id)}>to page</button>
       </div>
     {/each}
   </div>
