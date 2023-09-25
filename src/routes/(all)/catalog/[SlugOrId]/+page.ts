@@ -18,7 +18,7 @@ export type ProductItemOutput = {
     name: string,
     price: number,
     seoSlug: string,
-    image: string
+    image: string | null
 }
 export type ResponseProduct = {
     product: SingleProduct,
@@ -27,7 +27,7 @@ export type ResponseProduct = {
 
 export const load = (async ({params, url }) => {
     const domain = getDomain(url)
-    const slugOrId = params.SlugOrId
+    const slugOrId = params.slugOrId
     
     if(slugOrId == null) throw errors.searchError()
 

@@ -9,22 +9,22 @@
     $: id = data.single.product.id
     $: images = data.single.product.images ??[]
     let amount:number = 1
-    let current_image: number = 0;
+    let currentImage: number = 0;
     
-    async function changeAmount(arg: number) {
+    function changeAmount(arg: number) {
        if(amount == 1 && arg == -1) return
        amount += arg
     }
-    async function changeImage(arg: number) {
-       if(current_image == 0 && arg == -1) {
-        current_image = images.length-1
+    function changeImage(arg: number) {
+       if(currentImage == 0 && arg == -1) {
+        currentImage = images.length-1
         return
        }
-       else if(current_image == images.length-1){
-        current_image = 0
+       else if(currentImage == images.length-1){
+        currentImage = 0
         return
        }
-       current_image += arg
+       currentImage += arg
     }
     
     function singleProduct(slug: string, id:string){
@@ -43,7 +43,7 @@
        class="relative float-left min-w-full -mr-[100%] w-full transition-transform duration-[600ms] ease-in-out motion-reduce:transition-none"
        >
       <img
-        src="{images[current_image]}"
+        src="{images[currentImage]}"
         class="block w-full"
         alt="{data.single.product.name}" />
     </div>
@@ -170,7 +170,7 @@
       <div class="grid grid-cols-4 gap-4">
         {#each data.single.products as product}
           <button on:click={ ()=> singleProduct(product.seoSlug, product.id)} class="text-center">
-            {#if product.image}
+            {#if product.image != null}
               <div class="w-full h-auto px-2 mt-7 border-rgb-169-167-167 border-1">
                 <img
                   class="w-full h-auto object-contain border border-gray-300 mb-2"

@@ -1,7 +1,6 @@
 <script lang="ts">
   import type { PageData } from "./$types"
-  import { catalogProducts
-  ,type Product } from "$features/catalog"
+  import { catalogProducts, type Product } from "$features/catalog"
   import ScrollLoad from "$lib/components/ScrollLoad.svelte"
   import { storageImageUrl } from "$lib"
   import { goto } from "$app/navigation"
@@ -81,11 +80,6 @@
     isLoading = false
     return "continue"
   }
-
-    export async function singleProduct(slug: string, id:string){
-        if(slug == "") goto(`/catalog/${id}?SlugOrId=${id}`)
-        goto(`/catalog/${slug}?SlugOrId=${slug}`)
-    }
 </script>
 
 <div>
@@ -142,7 +136,11 @@
             alt="product-img"
           />
         {/if}
-        <button on:click={()=> singleProduct(product.slug, product.id)}>to page</button>
+        {#if product.slug == ""}
+          <a href="/catalog/{product.id}"> to page</a>
+        {:else}
+          <a href="/catalog/{product.slug}"> to page</a>
+        {/if}
       </div>
     {/each}
   </div>
