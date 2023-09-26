@@ -1,50 +1,47 @@
-import { errors, getDomain } from '$lib';
-import { call, callJson } from '$lib';
-import type { PageLoad } from './$types';
+import { errors, getDomain } from "$lib"
+import { call, callJson } from "$lib"
+import type { PageLoad } from "./$types"
 
 export type SingleProduct = {
-    id: string,
-    name: string,
-    price: number,
-    amount: number,
-    seoTitle: string,
-    seoDescription: string,
-    seoSlug: string,
-    description: string,
-    images: string[]
+  id: string
+  name: string
+  price: number
+  amount: number
+  seoTitle: string
+  seoDescription: string
+  seoSlug: string
+  description: string
+  images: string[]
 }
 export type ProductItemOutput = {
-    id: string,
-    name: string,
-    price: number,
-    seoSlug: string,
-    image: string | null
+  id: string
+  name: string
+  price: number
+  seoSlug: string
+  image: string | null
 }
 export type ResponseProduct = {
-    product: SingleProduct,
-    products: ProductItemOutput[]
+  product: SingleProduct
+  products: ProductItemOutput[]
 }
 
-export const load = (async ({params, url }) => {
-    const domain = getDomain(url)
-    const slugOrId = params.slugOrId
-    
-    if(slugOrId == null) throw errors.searchError()
+export const load: PageLoad = async ({ params, url }) => {
+  const domain = getDomain(url)
+  const slugOrId = params.slugOrId
 
-    const response = await call(fetch, {
-        route: `/v1/shop/single/${domain}/${slugOrId}/product`,
-        method: "GET"
-    })
-    
-    if(!response)  throw errors.serverError()
+  if (slugOrId == null) throw errors.searchError()
 
-    const json = await callJson<ResponseProduct>(response)
-    
-    if(json == null)  throw errors.serverError()
+  const response = await call(fetch, {
+    route: `/v1/shop/single/${domain}/${slugOrId}/product`,
+    method: "GET"
+  })
+  if (!response) throw errors.serverError()
 
-    return {
-      domain:domain,
-      single:json
-    }
+  const json = await callJson<ResponseProduct>(response)
+  if (json == null) throw errors.serverError()
 
-}) satisfies PageLoad;
+  return {
+    product: json.product,
+    similarProducts: json.products
+  }
+}

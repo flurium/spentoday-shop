@@ -1,15 +1,14 @@
 <script lang="ts">
   import type { PageData } from "./$types"
-  import { catalogProducts, type Product } from "$features/catalog"
+  import { catalogProducts } from "$features/catalog"
   import ScrollLoad from "$lib/components/ScrollLoad.svelte"
   import { storageImageUrl } from "$lib"
-  import { goto } from "$app/navigation"
 
   export let data: PageData
 
   let products = data.products
 
-  let search: string = ""
+  let search = ""
   let start: number = data.start
 
   enum order {

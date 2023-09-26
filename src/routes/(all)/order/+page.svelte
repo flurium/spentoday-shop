@@ -8,12 +8,12 @@
   import { goto } from "$app/navigation"
 
   export let data: PageData
-  let adress: string = ""
-  let phone: string = ""
-  let email: string = ""
-  let fullName: string = ""
-  let postIndex: string = ""
-  let comment: string = ""
+  let adress = ""
+  let phone = ""
+  let email = ""
+  let fullName = ""
+  let postIndex = ""
+  let comment = ""
   let modal: HTMLDialogElement
 
   $: sum = $cart.reduce((s, x) => s + x.price * x.amount, 0)
