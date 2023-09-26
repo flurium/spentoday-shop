@@ -25,7 +25,7 @@ export function localCartKey(index: number) {
 }
 
 export function localCartProducts() {
-  let cart: LocalCartProduct[] = []
+  const cart: LocalCartProduct[] = []
 
   for (let i = 0; i < localStorage.length; ++i) {
     const key = localCartKey(i)
