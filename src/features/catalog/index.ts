@@ -5,6 +5,7 @@ export type Product = {
   name: string
   price: number
   image?: StorageImage
+  slug: string
 }
 
 export async function catalogProducts(

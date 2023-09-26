@@ -1,6 +1,6 @@
 <script lang="ts">
   export let color: `#${string}` = "#6b7280"
-  let className: string = "w-6 h-6"
+  let className = "w-6 h-6"
   export { className as class }
 </script>
 

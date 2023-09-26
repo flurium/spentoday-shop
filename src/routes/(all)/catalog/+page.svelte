@@ -8,7 +8,7 @@
 
   let products = data.products
 
-  let search: string = ""
+  let search = ""
   let start: number = data.start
 
   enum order {
@@ -134,6 +134,11 @@
             src={storageImageUrl(product.image)}
             alt="product-img"
           />
+        {/if}
+        {#if product.slug == ""}
+          <a href="/catalog/{product.id}"> to page</a>
+        {:else}
+          <a href="/catalog/{product.slug}"> to page</a>
         {/if}
       </div>
     {/each}

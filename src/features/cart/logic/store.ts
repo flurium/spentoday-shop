@@ -25,7 +25,7 @@ async function getCart(): Promise<CartProduct[]> {
   // HIDDEN PROBLEM!
   if (apiCart == null) return []
 
-  let finalCart: CartProduct[] = []
+  const finalCart: CartProduct[] = []
   for (let i = 0; i < localCart.length; i += 1) {
     const localProduct = localCart[i]
 
