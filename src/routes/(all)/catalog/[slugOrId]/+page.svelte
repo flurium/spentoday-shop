@@ -1,4 +1,8 @@
-<./$types../[slugOrId]/$types"
+<script lang="ts">
+  import { cart } from "$features/cart"
+  import Minus from "$features/cart/ui/Minus.svelte"
+  import Plus from "$features/cart/ui/Plus.svelte"
+  import type { PageData } from "./$types"
 
   export let data: PageData
 

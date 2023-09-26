@@ -1,7 +1,5 @@
 <script lang="ts">
   import { cart } from "$features/cart"
-  import Minus from "$features/cart/ui/Minus.svelte"
-  import Plus from "$features/cart/ui/Plus.svelte"
   import Close from "$features/cart/ui/Close.svelte"
   import { call } from "$lib/fetch"
   import type { PageData } from "../$types"
