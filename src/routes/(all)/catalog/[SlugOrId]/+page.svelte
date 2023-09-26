@@ -168,6 +168,7 @@
     </div>
   {/each}
 </div>
+
 <div class="ms-10 mt-10 me-10">
   <div class="flex flex-col-3 w-full gap-x-10 border-b border-gray-400">
     <button
@@ -183,42 +184,37 @@
   <div>{data.product.seoDescription}</div>
 </div>
 
-<div class="grid grid-col-4 ms-10">
-  <div class="max-w-2xl py-16 sm:py-24 lg:max-w-7xl">
-    <h2 class="text-4xl font-bold text-gray-900">
-      ТАКОЖ МОЖЕ <br /> СПОДОБАТИСЬ
-    </h2>
-    <div class="grid grid-cols-4 gap-4">
-      {#each data.similarProducts as similarProduct}
-        <a
-          href="/catalog/{similarProduct.seoSlug == ''
-            ? similarProduct.id
-            : similarProduct.seoSlug}"
-          class="text-center"
-        >
-          {#if similarProduct.image != null}
-            <div
-              class="w-full h-auto px-2 mt-7 border-rgb-169-167-167 border-1"
-            >
-              <img
-                class="w-full h-auto object-contain border border-gray-300 mb-2"
-                src={similarProduct.image}
-                alt="Product"
-              />
-            </div>
-          {/if}
-          <div class="text-left pl-2">
-            <h3
-              class="font-inter font-semibold leading-6 tracking-normal text-gray-700 text-20"
-            >
-              {similarProduct.name}
-            </h3>
-            <p class="break-words whitespace-normal text-gray-700 text-20">
-              {similarProduct.price} грн
-            </p>
+<div class="px-10">
+  <h2 class="text-4xl font-bold text-gray-900">
+    ТАКОЖ МОЖЕ <br /> СПОДОБАТИСЬ
+  </h2>
+  <div class="grid grid-cols-4 gap-4">
+    {#each data.similarProducts as similarProduct}
+      <a
+        href="/catalog/{similarProduct.seoSlug == ''
+          ? similarProduct.id
+          : similarProduct.seoSlug}"
+      >
+        {#if similarProduct.image != null}
+          <div class="w-full h-auto px-2 mt-7 border-rgb-169-167-167 border-1">
+            <img
+              class="w-full h-auto object-contain border border-gray-300 mb-2"
+              src={similarProduct.image}
+              alt="Product"
+            />
           </div>
-        </a>
-      {/each}
-    </div>
+        {/if}
+        <div class="text-left pl-2">
+          <h3
+            class="font-inter font-semibold leading-6 tracking-normal text-gray-700 text-20"
+          >
+            {similarProduct.name}
+          </h3>
+          <p class="break-words whitespace-normal text-gray-700 text-20">
+            {similarProduct.price} грн
+          </p>
+        </div>
+      </a>
+    {/each}
   </div>
 </div>
