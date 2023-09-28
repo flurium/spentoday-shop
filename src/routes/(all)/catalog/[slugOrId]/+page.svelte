@@ -169,12 +169,12 @@
         {/if}
 
         <div
-          class="place-self-center grid grid-cols-3 md:w-fit w-full place-items-center
+          class="grid grid-cols-3 md:w-fit w-full place-items-center
           border border-lines rounded-full"
         >
           <button
             on:click={() => changeAmount(1)}
-            class="p-5 border-r border-r-lines grid place-items-center"
+            class="p-5 border-r border-r-lines grid place-items-center w-full"
           >
             <Plus />
           </button>
@@ -196,7 +196,7 @@
     ТАКОЖ МОЖЕ <br /> СПОДОБАТИСЬ
   </h2>
 
-  <div class="grid grid-cols-4 gap-4">
+  <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
     {#each data.similarProducts as similarProduct}
       <a
         href="/catalog/{similarProduct.seoSlug == ''
