@@ -13,6 +13,7 @@ export type SingleProduct = {
   description: string
   images: string[]
 }
+
 export type ProductItemOutput = {
   id: string
   name: string
@@ -20,16 +21,16 @@ export type ProductItemOutput = {
   seoSlug: string
   image: string | null
 }
+
 export type ResponseProduct = {
   product: SingleProduct
   products: ProductItemOutput[]
+  categories: string[]
 }
 
 export const load: PageLoad = async ({ params, url }) => {
   const domain = getDomain(url)
   const slugOrId = params.slugOrId
-
-  if (slugOrId == null) throw errors.searchError()
 
   const response = await call(fetch, {
     route: `/v1/shop/single/${domain}/${slugOrId}/product`,
@@ -42,6 +43,7 @@ export const load: PageLoad = async ({ params, url }) => {
 
   return {
     product: json.product,
-    similarProducts: json.products
+    similarProducts: json.products,
+    categories: json.categories
   }
 }
