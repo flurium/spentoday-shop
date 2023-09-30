@@ -20,12 +20,12 @@ export const load = (async ({ url }) => {
   const start = getStart(url)
 
   const response = await catalogProducts(domain, "", start)
-  console.log(response)
   if (response == null) throw error(500, "Problem")
 
   return {
     domain: domain,
     products: response,
-    start: start + response.length
+    start: start + response.length,
+    categories: ["Літні сукні", "Жіночі футболки", "Літні штани"] as string[]
   }
 }) satisfies PageLoad

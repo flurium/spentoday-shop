@@ -33,6 +33,7 @@
   },
   "type": "module",
   "dependencies": {
+    "@formkit/auto-animate": "^0.8.0",
     "remark": "^14.0.3",
     "remark-gfm": "^3.0.1",
     "remark-html": "^15.0.2"

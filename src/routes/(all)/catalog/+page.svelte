@@ -3,6 +3,8 @@
   import { catalogProducts } from "$features/catalog"
   import ScrollLoad from "$lib/components/ScrollLoad.svelte"
   import { storageImageUrl } from "$lib"
+  import autoAnimate from "@formkit/auto-animate"
+  import ProductCard from "$features/catalog/ProductCard.svelte"
 
   export let data: PageData
 
@@ -11,12 +13,12 @@
   let search = ""
   let start: number = data.start
 
-  enum order {
-    "-//-" = 0,
+  const orders = [
+    "Сортувати за новинками",
     "Від дешевих до дорожчих",
     "Від дорогих до дешевших"
-  }
-  let orderBy = order["-//-"]
+  ]
+  let orderBy = 0
 
   let isLoading = false
 
@@ -81,72 +83,80 @@
   }
 </script>
 
-<div>
-  <div class="flex">
-    <input
-      class="w-1/2 bg-gray-100 focus:bg-gray-50 px-6 py-3 mr-6 rounded-md border border-gray-200"
-      type="text"
-      on:keyup={debounceChange}
-      bind:value={search}
-      placeholder="Пошук продуктів"
-    />
-    <input
-      class=" bg-gray-100 focus:bg-gray-50 px-6 py-3 mx-6 rounded-md border border-gray-200"
-      type="number"
-      on:keyup={debounceChange}
-      bind:value={minPrice}
-      max={maxPrice}
-      placeholder="Мінімальна ціна"
-    />
-    <input
-      class=" bg-gray-100 focus:bg-gray-50 px-6 py-3 mx-6 rounded-md border border-gray-200"
-      type="number"
-      on:keyup={debounceChange}
-      bind:value={maxPrice}
-      min={minPrice}
-      placeholder="Максимальна ціна"
-    />
+<div class="px-10 pt-5 pb-40">
+  <input
+    class="border border-lines rounded-full py-5 px-8 w-full"
+    on:keyup={debounceChange}
+    bind:value={search}
+    placeholder="Пошук продуктів"
+  />
 
+  <div class="flex justify-end my-3">
     <select
-      class="w-1/6 bg-gray-100 block focus:bg-gray-50 px-6 py-3 ml-6 rounded-md border border-gray-200"
+      class="font-medium cursor-pointer p-3 bg-inherit"
       bind:value={orderBy}
       on:change={debounceChange}
     >
-      {#each [order["-//-"], order["Від дешевих до дорожчих"], order["Від дорогих до дешевших"]] as orderValue}
-        <option value={orderValue}>{order[orderValue]}</option>
+      {#each orders as order, i}
+        <option value={i}>{order}</option>
       {/each}
     </select>
   </div>
 
-  <div class="grid grid-cols-5 gap-4">
-    {#each products as product (product.id)}
-      <div>
-        <span>
-          Назва: {product.name}
-        </span>
-        <span>
-          Ціна: {product.price}
-        </span>
-        {#if product.image != null}
-          <img
-            width="200px"
-            height="200px"
-            src={storageImageUrl(product.image)}
-            alt="product-img"
-          />
-        {/if}
-        {#if product.slug == ""}
-          <a href="/catalog/{product.id}"> to page</a>
-        {:else}
-          <a href="/catalog/{product.slug}"> to page</a>
-        {/if}
-      </div>
-    {/each}
-  </div>
+  <div class="grid md:grid-cols-[auto_1fr] gap-10">
+    <div class="max-w-xl text-secondary-700">
+      <p class="mb-3">Ціна</p>
 
-  {#if !infinityScroll}
-    <button on:click={() => (infinityScroll = true)}>Load More</button>
-  {:else}
-    <ScrollLoad load={loadMore} />
-  {/if}
+      <div class="grid grid-cols-[auto_auto] gap-4">
+        <label class="self-center" for="min">Від</label>
+        <input
+          id="min"
+          class="p-2 border border-lines bg-inherit"
+          type="number"
+          on:keyup={debounceChange}
+          bind:value={minPrice}
+          max={maxPrice}
+          min={0}
+        />
+        <label class="self-center" for="max">До</label>
+        <input
+          class="p-2 border border-lines bg-inherit"
+          type="number"
+          id="max"
+          on:keyup={debounceChange}
+          bind:value={maxPrice}
+          min={minPrice}
+        />
+      </div>
+
+      <p class="mt-10 mb-5">Категорія</p>
+      {#each data.categories as category}
+        <label class="flex gap-3 items-center mb-5 cursor-pointer">
+          <input
+            class="appearance-none h-5 w-5 border-lines
+            border checked:bg-lines"
+            type="checkbox"
+            value={category}
+          />
+          {category}
+        </label>
+      {/each}
+    </div>
+    <div>
+      <div
+        class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10"
+        use:autoAnimate
+      >
+        {#each products as product (product.id)}
+          <ProductCard {product} />
+        {/each}
+      </div>
+
+      {#if !infinityScroll}
+        <button on:click={() => (infinityScroll = true)}>Load More</button>
+      {:else}
+        <ScrollLoad load={loadMore} />
+      {/if}
+    </div>
+  </div>
 </div>
