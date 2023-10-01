@@ -1,7 +1,7 @@
 import { error } from "@sveltejs/kit"
 import type { PageLoad } from "./$types"
 import { catalogProducts } from "$features/catalog"
-import { getDomain } from "$lib"
+import { call, getDomain, type Fetch, callJson } from "$lib"
 
 function getStart(url: URL) {
   const startParam = url.searchParams.get("start")
@@ -15,17 +15,41 @@ function getStart(url: URL) {
   }
 }
 
-export const load = (async ({ url }) => {
+async function catalogCategories(fetch: Fetch, domain: string) {
+  const res = await call(fetch, {
+    route: `/v1/shop/catalog/${domain}/categories`,
+    method: "GET"
+  })
+  if (res == null || !res.ok) return null
+
+  const json = await callJson<
+    {
+      id: string
+      name: string
+      parentId: string | null
+    }[]
+  >(res)
+  return json
+}
+
+export const load = (async ({ fetch, url }) => {
   const domain = getDomain(url)
   const start = getStart(url)
 
-  const response = await catalogProducts(domain, "", start)
-  if (response == null) throw error(500, "Problem")
+  const products = await catalogProducts(fetch, domain, {
+    search: "",
+    start: start,
+    categories: []
+  })
+  if (products == null) throw error(500, "Problem")
+
+  const categories = await catalogCategories(fetch, domain)
+  if (categories == null) throw error(500, "Не можемо завантажити категорії")
 
   return {
     domain: domain,
-    products: response,
-    start: start + response.length,
-    categories: ["Літні сукні", "Жіночі футболки", "Літні штани"] as string[]
+    products: products,
+    start: start + products.length,
+    categories
   }
 }) satisfies PageLoad

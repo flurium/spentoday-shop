@@ -2,7 +2,6 @@
   import type { PageData } from "./$types"
   import { catalogProducts } from "$features/catalog"
   import ScrollLoad from "$lib/components/ScrollLoad.svelte"
-  import { storageImageUrl } from "$lib"
   import autoAnimate from "@formkit/auto-animate"
   import ProductCard from "$features/catalog/ProductCard.svelte"
 
@@ -33,20 +32,22 @@
     if (products[i].price < minPrice) minPrice = products[i].price
   }
 
+  let categories: string[] = []
+
   function debounceChange() {
     clearTimeout(timer)
     timer = setTimeout(catalog, 700)
   }
 
   async function catalog() {
-    const response = await catalogProducts(
-      data.domain,
-      search,
-      0,
-      minPrice,
-      maxPrice,
-      orderBy
-    )
+    const response = await catalogProducts(fetch, data.domain, {
+      search: search,
+      start: 0,
+      min: minPrice,
+      max: maxPrice,
+      order: orderBy,
+      categories: categories
+    })
     if (response == null) return
 
     infinityScroll = false
@@ -59,14 +60,14 @@
     if (isLoading) return "skip"
 
     isLoading = true
-    const response = await catalogProducts(
-      data.domain,
-      search,
-      start,
-      minPrice,
-      maxPrice,
-      orderBy
-    )
+    const response = await catalogProducts(fetch, data.domain, {
+      search: search,
+      start: start,
+      min: minPrice,
+      max: maxPrice,
+      order: orderBy,
+      categories: categories
+    })
     if (response == null) {
       isLoading = false
       return "continue"
@@ -136,9 +137,11 @@
             class="appearance-none h-5 w-5 border-lines
             border checked:bg-lines"
             type="checkbox"
-            value={category}
+            value={category.id}
+            bind:group={categories}
+            on:change={debounceChange}
           />
-          {category}
+          {category.name}
         </label>
       {/each}
     </div>
