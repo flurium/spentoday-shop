@@ -5,7 +5,6 @@ import type { PageLoad } from "./$types"
 export type InfoPages = {
    slug :string,
    title : string,
-   discription : string
 }
 
 export const load: PageLoad = async ({fetch, url }) => {

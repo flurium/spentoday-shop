@@ -21,25 +21,31 @@
 </div>
 
 <style lang="postcss">
+
   .content :global(h1) {
-    @apply mb-12 text-8xl font-bold;
+    @apply mb-12 text-6xl font-bold;
   }
+
   .content :global(h2) {
-    @apply mt-8 mb-4 text-6xl font-semibold;
+    @apply mt-8 mb-4 text-4xl font-semibold;
   }
+
   .content :global(h3) {
-    @apply mt-6 mb-4 text-4xl font-semibold;
+    @apply mt-6 mb-4 text-2xl font-semibold;
   }
+
   .content :global(p),
   .content :global(ul),
   .content :global(ol) {
     @apply mb-4;
   }
+
   .content :global(ul) {
     @apply list-none list-inside text-xl my-5;
      padding-left: 2rem;
      margin-top: 1rem;
   }
+
   .content :global(ol) {
     @apply list-decimal list-inside text-xl my-5;
     padding-left: 2rem; 
@@ -52,6 +58,14 @@
     
   }
 
+  .content :global(img) {
+    @apply  h-auto my-16  border-2 border-secondary-400 rounded-3xl;
+  }
+
+  .table {
+    @apply w-full;
+  }
+
   .content :global(ul li::before) {
     content: '\2013'; 
     left: -1.25rem; 
@@ -59,19 +73,19 @@
     font-size: 1.25rem;
   }
 
-  
   .content :global(a) {
     @apply text-lg;
      text-decoration: underline;
   }
 
-   .content :global(a:hover) {
+  .content :global(a:hover) {
     text-decoration: none; 
   }
 
   .content :global(pre) {
     @apply rounded-md p-4;
   }
+
   .content :global(blockquote) {
     @apply p-4 my-4 border-l-4 border-gray-300 bg-gray-50;
   }

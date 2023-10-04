@@ -4,7 +4,9 @@ import type { PageLoad } from "../../$types"
 
 export type InfoPage = {
    slug :string,
-   content  : string
+   title:string,
+   content  : string,
+   time : string
 }
 
 export const load: PageLoad = async ({fetch, params }) => {
