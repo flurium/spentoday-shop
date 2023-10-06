@@ -35,8 +35,9 @@
   let categories: string[] = []
 
   function debounceChange() {
+    console.log("change")
     clearTimeout(timer)
-    timer = setTimeout(catalog, 700)
+    timer = setTimeout(catalog, 500)
   }
 
   async function catalog() {
@@ -135,7 +136,7 @@
         <label class="flex gap-3 items-center mb-5 cursor-pointer">
           <input
             class="appearance-none h-5 w-5 border-lines
-            border checked:bg-lines"
+            border checked:bg-lines cursor-pointer"
             type="checkbox"
             value={category.id}
             bind:group={categories}
