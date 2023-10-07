@@ -6,7 +6,7 @@
 
   export let data: PageData
 
-  let images = data.product.images
+  $: images = data.product.images ??[]
 
   let amount = 1
   let currentImage = 0
@@ -138,9 +138,15 @@
       <h1 class="font-bold text-5xl text-secondary-700">
         {data.product.name}
       </h1>
+      {#if data.product.isDiscount}
+      <p class="text-xl text-red-500 mt-5">
+        <span class="mr-3 text-gray-500 line-through">{data.product.price} грн.</span> {data.product.discountPrice} грн.
+      </p>
+      {:else}
       <p class="text-xl text-red-500 mt-5">
         {data.product.price} грн.
       </p>
+      {/if}
       <p class="md:text-lg lg:text-xl text-gray-600 mt-8">
         {data.product.description}
       </p>
@@ -156,15 +162,17 @@
         {:else}
           <button
             on:click={() =>
-              cart.add({
-                id: data.product.id,
-                name: data.product.name,
-                price: data.product.price,
-                amount: amount
-              })}
-            class="bg-yellow-400 px-14 py-5 rounded-full border border-lines md:w-fit w-full"
+            cart.add({
+              id: data.product.id,
+              name: data.product.name,
+              price: data.product.price,
+              discountPrice: data.product.discountPrice,
+              isDiscount: data.product.isDiscount,
+              amount: amount
+            })}
+          class="bg-yellow-400 px-14 py-5 rounded-full border border-lines md:w-fit w-full"
           >
-            Додати до кошику
+          Додати до кошику
           </button>
         {/if}
 
@@ -218,9 +226,15 @@
           >
             {similarProduct.name}
           </h3>
-          <p class="break-words whitespace-normal text-gray-700 text-20">
-            {similarProduct.price} грн
-          </p>
+            {#if similarProduct.isDiscount}
+            <p class="reak-words whitespace-normal text-secondary text-20">
+              {similarProduct.discountPrice} грн. <sup class="text-secondary-400 line-through"> {similarProduct.price}</sup>
+            </p>
+            {:else}
+            <p class="reak-words whitespace-normal text-secondary text-20">
+              {similarProduct.price} грн.
+            </p>
+            {/if}
         </div>
       </a>
     {/each}

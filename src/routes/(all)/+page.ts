@@ -25,6 +25,8 @@ export type HomeProduct = {
   id: string
   name: string
   price: number
+  discountPrice: number
+  isDiscount: boolean
   image: string
 }
 

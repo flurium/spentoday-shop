@@ -92,9 +92,15 @@
         >
           {product.name}
         </h3>
-        <p class="break-words whitespace-normal text-gray-700 text-20">
-          {product.price} грн
+        {#if product.isDiscount}
+        <p class="reak-words whitespace-normal text-secondary text-20">
+          {product.discountPrice} грн. <sup class="text-secondary-400 line-through"> {product.price}</sup>
         </p>
+        {:else}
+        <p class="reak-words whitespace-normal text-secondary text-20">
+          {product.price} грн.
+        </p>
+        {/if}
       </div>
     </div>
   {/each}
