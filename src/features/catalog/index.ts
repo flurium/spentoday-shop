@@ -4,6 +4,8 @@ export type Product = {
   id: string
   name: string
   price: number
+  discountPrice: number
+  isDiscount: boolean
   image?: StorageImage
   slug: string
 }

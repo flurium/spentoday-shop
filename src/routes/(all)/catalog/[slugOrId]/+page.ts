@@ -6,6 +6,8 @@ export type SingleProduct = {
   id: string
   name: string
   price: number
+  discountPrice: number
+  isDiscount: boolean
   amount: number
   seoTitle: string
   seoDescription: string
@@ -18,6 +20,8 @@ export type ProductItemOutput = {
   id: string
   name: string
   price: number
+  discountPrice: number
+  isDiscount: boolean
   seoSlug: string
   image: string | null
 }
