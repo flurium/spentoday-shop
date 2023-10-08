@@ -16,6 +16,7 @@ On all pages we need:
 export type LayoutShop = {
   id: string
   name: string
+  accentColor: string
   categories: { id: string; name: string }[]
   pages: { slug: string; name: string }[]
   socialMediaLinks: { name: string; link: string }[]
