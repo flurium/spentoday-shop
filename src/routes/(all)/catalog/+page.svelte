@@ -4,6 +4,7 @@
   import ScrollLoad from "$lib/components/ScrollLoad.svelte"
   import autoAnimate from "@formkit/auto-animate"
   import ProductCard from "$features/catalog/ProductCard.svelte"
+  import Seo from "$lib/components/Seo.svelte"
 
   export let data: PageData
 
@@ -84,6 +85,25 @@
     return "continue"
   }
 </script>
+
+<Seo
+  title={"Каталог"}
+  description={`Каталог в онлайн магазині "${
+    data.shop.name
+  }". Продає: ${data.shop.categories.join(", ")}`}
+  shop={data.shop.name}
+  domain={data.domain}
+/>
+
+<svelte:head>
+  <title>{`Каталог | ${data.shop.name}`}</title>
+  <meta
+    name="description"
+    content={`Каталог в онлайн магазині "${
+      data.shop.name
+    }". Продає: ${data.shop.categories.join(", ")}`}
+  />
+</svelte:head>
 
 <div class="px-10 pt-5 pb-40">
   <input

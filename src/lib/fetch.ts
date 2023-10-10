@@ -28,7 +28,7 @@ export async function call(fetchFunc: Fetch, info: FetchInfo) {
       },
       body: JSON.stringify(info.body)
     })
-  } catch {
+  } catch (e: any) {
     return null
   }
 }

@@ -1,4 +1,5 @@
 <script lang="ts">
+  import Seo from "$lib/components/Seo.svelte"
   import type { PageData } from "./$types"
 
   export let data: PageData
@@ -42,6 +43,14 @@
   ]
 </script>
 
+<Seo
+  description="{`Онлайн магазин: ${
+    data.shop.name
+  }. Продає: ${data.shop.categories.join(', ')}`}}"
+  shop={data.shop.name}
+  domain={data.domain}
+/>
+
 {#if data.shopData.topBanner != null}
   <div class="pb-12 mb-32">
     <div class="px-12 w-full">
@@ -49,6 +58,7 @@
         class="w-full h-auto mx-auto border-x border-lines"
         src={data.shopData.topBanner}
         alt="Banner"
+        width="1920"
       />
     </div>
 
@@ -80,6 +90,8 @@
       {#if product.image}
         <div class="w-full h-auto px-2 mt-7 border-rgb-169-167-167 border-1">
           <img
+            width="400"
+            height="400"
             class="w-full h-auto object-contain border border-gray-300 mb-2"
             src={product.image}
             alt="Product"

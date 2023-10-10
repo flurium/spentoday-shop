@@ -46,15 +46,17 @@
     <div class="col-span-4 flex items-center justify-between h-full">
       <div class="h-5 w-px bg-lines self-end" />
       <a href="/catalog" class="text-secondary-700 font-medium">КАТАЛОГ</a>
-      <a href="/about" class="text-secondary-500">ПРО НАС</a>
+      <a href="/about" class="text-secondary-600">ПРО НАС</a>
       <div class="h-5 w-px bg-lines self-end" />
     </div>
 
     <div class="col-span-4 flex gap-4">
-      <button class="border border-secondary-300 rounded-full p-1 w-full"
-        >Search</button
-      >
-      <button on:click={toggleCartDialog}><CartIcon /></button>
+      <button class="border border-secondary-300 rounded-full p-1 w-full">
+        Search
+      </button>
+      <button on:click={toggleCartDialog} aria-label="Корзина">
+        <CartIcon />
+      </button>
     </div>
   </nav>
 </header>

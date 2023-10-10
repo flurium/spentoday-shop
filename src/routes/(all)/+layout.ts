@@ -1,7 +1,6 @@
 import { call, callJson, getDomain, errors } from "$lib"
 import { redirect } from "@sveltejs/kit"
 import type { LayoutLoad } from "./$types"
-import { dev } from "$app/environment"
 
 /*
 
