@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { goto } from "$app/navigation"
   import { CartDialogContent, CartIcon } from "$features/cart"
   import { call } from "$lib"
   import Dialog from "$lib/components/Dialog.svelte"

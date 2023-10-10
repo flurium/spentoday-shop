@@ -25,7 +25,7 @@ async function getCart(): Promise<CartProduct[]> {
   // HIDDEN PROBLEM!
   if (apiCart == null) return []
 
-  let finalCart: CartProduct[] = []
+  const finalCart: CartProduct[] = []
   for (let i = 0; i < localCart.length; i += 1) {
     const localProduct = localCart[i]
 
@@ -52,8 +52,25 @@ export function createCart() {
     getCart().then((x) => store.set(x))
   }
 
-  function add(product: CartProduct) {
-    store.update((list) => [...list, product])
+  function add(product: {id:string, 
+    amount: number
+    name: string
+    price: number
+    discountPrice: number
+    isDiscount: boolean
+    image?: string}) {
+    
+    let newProduct:CartProduct = {
+      id:product.id,
+      amount: product.amount,
+      name: product.name,
+      price: product.price,
+      image: product.image,
+    }
+
+    if(product.isDiscount) newProduct.price = product.discountPrice
+
+    store.update((list) => [...list, newProduct])
     setLocalProduct({ id: product.id, amount: product.amount })
   }
 
