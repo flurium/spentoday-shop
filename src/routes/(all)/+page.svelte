@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { PUBLIC_API_URL } from "$env/static/public"
   import Seo from "$lib/components/Seo.svelte"
   import type { PageData } from "./$types"
 
@@ -105,13 +106,14 @@
           {product.name}
         </h3>
         {#if product.isDiscount}
-        <p class="reak-words whitespace-normal text-secondary text-20">
-          {product.discountPrice} грн. <sup class="text-secondary-400 line-through"> {product.price}</sup>
-        </p>
+          <p class="reak-words whitespace-normal text-secondary text-20">
+            {product.discountPrice} грн.
+            <sup class="text-secondary-400 line-through"> {product.price}</sup>
+          </p>
         {:else}
-        <p class="reak-words whitespace-normal text-secondary text-20">
-          {product.price} грн.
-        </p>
+          <p class="reak-words whitespace-normal text-secondary text-20">
+            {product.price} грн.
+          </p>
         {/if}
       </div>
     </div>
