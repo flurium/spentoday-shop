@@ -3,6 +3,7 @@
   import Minus from "$features/cart/ui/Minus.svelte"
   import Plus from "$features/cart/ui/Plus.svelte"
   import type { PageData } from "./$types"
+  import Seo from "$lib/components/Seo.svelte"
 
   export let data: PageData
 
@@ -27,10 +28,13 @@
   }
 </script>
 
-<svelte:head>
-  <title>{data.product.seoTitle}</title>
-  <meta name="description" content={data.product.seoDescription} />
-</svelte:head>
+<Seo
+  title={data.product.seoTitle}
+  description={data.product.seoDescription}
+  shop={data.shop.name}
+  domain={data.domain}
+  images={data.product.images}
+/>
 
 <div class="mx-10 pt-16 pb-36">
   <div class="flex gap-1 mb-6">
