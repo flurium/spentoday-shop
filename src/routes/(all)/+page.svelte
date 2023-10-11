@@ -52,14 +52,22 @@
   domain={data.domain}
 />
 
-<!-- {#if data.shopData.topBanner != null}
+<svelte:head>
+  {#if data.shopData.topBanner != null}
+    <link rel="preload" href={data.shopData.topBanner} as="image" />
+  {/if}
+</svelte:head>
+
+{#if data.shopData.topBanner != null}
   <div class="pb-12 mb-32">
     <div class="px-12 w-full">
       <img
         class="w-full h-auto mx-auto border-x border-lines"
         src={data.shopData.topBanner}
         alt="Banner"
-        width="1920"
+        width="1200"
+        height="600"
+        loading="eager"
       />
     </div>
 
@@ -75,7 +83,7 @@
       {/each}
     </div>
   </div>
-{/if} -->
+{/if}
 
 <div class="flex justify-between items-center px-12 mb-10">
   <h2 class="text-5xl font-extrabold text-secondary-700">ПОПУЛЯРНІ ПРОДУКТИ</h2>
@@ -141,6 +149,8 @@
                 class="max-h-96 object-contain mb-2"
                 src={banner.url}
                 alt="Product Banner"
+                width="600"
+                height="250"
                 loading="lazy"
               />
             </div>
