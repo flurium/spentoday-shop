@@ -52,7 +52,7 @@
   domain={data.domain}
 />
 
-{#if data.shopData.topBanner != null}
+<!-- {#if data.shopData.topBanner != null}
   <div class="pb-12 mb-32">
     <div class="px-12 w-full">
       <img
@@ -75,7 +75,7 @@
       {/each}
     </div>
   </div>
-{/if}
+{/if} -->
 
 <div class="flex justify-between items-center px-12 mb-10">
   <h2 class="text-5xl font-extrabold text-secondary-700">ПОПУЛЯРНІ ПРОДУКТИ</h2>
@@ -85,7 +85,7 @@
   </a>
 </div>
 
-<div class="grid grid-cols-4 gap-4 mx-10">
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4 mx-10">
   {#each products as product}
     <div class="text-center">
       {#if product.image}
@@ -141,6 +141,7 @@
                 class="max-h-96 object-contain mb-2"
                 src={banner.url}
                 alt="Product Banner"
+                loading="lazy"
               />
             </div>
           {/each}
