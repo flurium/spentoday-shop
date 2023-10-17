@@ -21,14 +21,15 @@ async function catalogCategories(fetch: Fetch, domain: string) {
     method: "GET"
   })
   if (res == null || !res.ok) return null
-
-  const json = await callJson<
-    {
+  const json = await callJson<{
+    list: {
       id: string
       name: string
       parentId: string | null
+      level: number
     }[]
-  >(res)
+    maxLevel: number
+  }>(res)
   return json
 }
 
@@ -41,6 +42,7 @@ export const load = (async ({ fetch, url }) => {
     start: start,
     categories: []
   })
+
   if (products == null) throw error(500, "Problem")
 
   const categories = await catalogCategories(fetch, domain)

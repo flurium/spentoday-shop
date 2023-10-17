@@ -126,7 +126,7 @@
   </div>
 
   <div class="grid md:grid-cols-[auto_1fr] gap-10">
-    <div class="max-w-xl text-secondary-700">
+    <div class="max-w-xs text-secondary-700">
       <p class="mb-3">Ціна</p>
 
       <div class="grid grid-cols-[auto_auto] gap-4">
@@ -152,8 +152,12 @@
       </div>
 
       <p class="mt-10 mb-5">Категорія</p>
-      {#each data.categories as category}
-        <label class="flex gap-3 items-center mb-5 cursor-pointer">
+
+      {#each data.categories.list as category}
+        <label
+          class="flex gap-3 items-center mb-5 cursor-pointer"
+          style="padding-left: {0.5 * (category.level - 1)}rem"
+        >
           <input
             class="appearance-none h-5 w-5 border-lines
             border checked:bg-lines cursor-pointer"
