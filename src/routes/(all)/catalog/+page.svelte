@@ -155,8 +155,8 @@
 
       {#each data.categories.list as category}
         <label
-          class="flex gap-3 items-center mb-5 cursor-pointer"
-          style="padding-left: {0.5 * (category.level - 1)}rem"
+          class="flex gap-3 items-center mb-4 cursor-pointer"
+          style="padding-left: {1.25 * (category.level - 1)}rem"
         >
           <input
             class="appearance-none h-5 w-5 border-lines
