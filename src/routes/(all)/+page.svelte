@@ -8,7 +8,7 @@
   let products = data.shopData.products
 
   let banners = data.shopData.banners
-  const numVisibleBanners = 4
+  const numVisibleBanners = 2
   let startIndexBanners = 0
 
   let arrowsVisible = false

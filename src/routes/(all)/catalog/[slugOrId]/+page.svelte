@@ -174,7 +174,7 @@
               isDiscount: data.product.isDiscount,
               amount: amount
             })}
-          class="bg-yellow-400 px-14 py-5 rounded-full border border-lines md:w-fit w-full"
+          class="px-14 py-5 rounded-full border border-lines md:w-fit w-full" style={`background-color: ${data.shop.accentColor};`}
           >
           Додати до кошику
           </button>
