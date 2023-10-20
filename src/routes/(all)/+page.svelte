@@ -1,5 +1,6 @@
 <script lang="ts">
   import { PUBLIC_API_URL } from "$env/static/public"
+  import ProductCard from "$features/catalog/ProductCard.svelte"
   import Seo from "$lib/components/Seo.svelte"
   import type { PageData } from "./$types"
 
@@ -95,36 +96,7 @@
 
 <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mx-10">
   {#each products as product}
-    <div class="text-center">
-      {#if product.image}
-        <div class="w-full h-auto px-2 mt-7 border-rgb-169-167-167 border-1">
-          <img
-            width="400"
-            height="400"
-            class="w-full h-auto object-contain border border-gray-300 mb-2"
-            src={product.image}
-            alt="Product"
-          />
-        </div>
-      {/if}
-      <div class="text-left pl-2">
-        <h3
-          class="font-inter font-semibold leading-6 tracking-normal text-gray-700 text-20"
-        >
-          {product.name}
-        </h3>
-        {#if product.isDiscount}
-          <p class="reak-words whitespace-normal text-secondary text-20">
-            {product.discountPrice} грн.
-            <sup class="text-secondary-400 line-through"> {product.price}</sup>
-          </p>
-        {:else}
-          <p class="reak-words whitespace-normal text-secondary text-20">
-            {product.price} грн.
-          </p>
-        {/if}
-      </div>
-    </div>
+    <ProductCard {product} />
   {/each}
 </div>
 
@@ -190,14 +162,13 @@
 </div>
 
 <section class="my-32 mx-12 grid grid-cols-1 md:grid-cols-2 text-secondary-600">
-  <div>
-    <h2 class="text-5xl font-extrabold">
-      ПОПУЛЯРНІ<br />КАТЕГОРІЇ
-    </h2>
-  </div>
-  <ul class="mt-10">
+  <h2 class="text-5xl font-extrabold">
+    ПОПУЛЯРНІ<br />КАТЕГОРІЇ
+  </h2>
+  <div class="mt-10">
     {#each data.shopData.categories as category, i}
-      <li
+      <a
+        href="/catalog?categories={category.id}"
         class="py-3 border-b border-b-secondary-400 flex justify-between items-center"
       >
         <div>
@@ -209,7 +180,7 @@
           </span>
         </div>
         <span class="text-2xl">&#129125;</span>
-      </li>
+      </a>
     {/each}
-  </ul>
+  </div>
 </section>

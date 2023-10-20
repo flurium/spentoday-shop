@@ -33,10 +33,9 @@
     if (products[i].price < minPrice) minPrice = products[i].price
   }
 
-  let categories: string[] = []
+  let categories = data.categoriesToSearch
 
   function debounceChange() {
-    console.log("change")
     clearTimeout(timer)
     timer = setTimeout(catalog, 500)
   }
@@ -95,16 +94,6 @@
   domain={data.domain}
 />
 
-<svelte:head>
-  <title>{`Каталог | ${data.shop.name}`}</title>
-  <meta
-    name="description"
-    content={`Каталог в онлайн магазині "${
-      data.shop.name
-    }". Продає: ${data.shop.categories.join(", ")}`}
-  />
-</svelte:head>
-
 <div class="px-10 pt-5 pb-40">
   <input
     class="border border-lines rounded-full py-5 px-8 w-full"
@@ -135,7 +124,8 @@
           id="min"
           class="p-2 border border-lines bg-inherit"
           type="number"
-          on:keyup={debounceChange}
+          on:change={debounceChange}
+          on:input={debounceChange}
           bind:value={minPrice}
           max={maxPrice}
           min={0}
@@ -145,7 +135,8 @@
           class="p-2 border border-lines bg-inherit"
           type="number"
           id="max"
-          on:keyup={debounceChange}
+          on:input={debounceChange}
+          on:change={debounceChange}
           bind:value={maxPrice}
           min={minPrice}
         />

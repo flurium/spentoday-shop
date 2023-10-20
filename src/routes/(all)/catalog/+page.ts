@@ -5,9 +5,7 @@ import { call, getDomain, type Fetch, callJson } from "$lib"
 
 function getStart(url: URL) {
   const startParam = url.searchParams.get("start")
-  if (startParam == null) {
-    return 0
-  }
+  if (startParam == null) return 0
   try {
     return Number.parseInt(startParam)
   } catch {
@@ -36,11 +34,12 @@ async function catalogCategories(fetch: Fetch, domain: string) {
 export const load = (async ({ fetch, url }) => {
   const domain = getDomain(url)
   const start = getStart(url)
+  const categoriesToSearch = url.searchParams.getAll("categories")
 
   const products = await catalogProducts(fetch, domain, {
     search: "",
     start: start,
-    categories: []
+    categories: categoriesToSearch
   })
 
   if (products == null) throw error(500, "Problem")
@@ -52,6 +51,7 @@ export const load = (async ({ fetch, url }) => {
     domain: domain,
     products: products,
     start: start + products.length,
-    categories
+    categories,
+    categoriesToSearch
   }
 }) satisfies PageLoad
