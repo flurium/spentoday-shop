@@ -26,12 +26,10 @@
 
   let infinityScroll = false
 
-  let minPrice = products[0].price
-  let maxPrice = minPrice
-  for (let i = 1; i < products.length; i++) {
-    if (products[i].price > maxPrice) maxPrice = products[i].price
-    if (products[i].price < minPrice) minPrice = products[i].price
-  }
+  let minPrice = 0
+  let maxPrice = products.reduce((max, product) => {
+    return product.price > max ? product.price : max
+  }, 0)
 
   let categories = data.categoriesToSearch
 
