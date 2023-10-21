@@ -75,7 +75,7 @@
     <br />
 
     <button
-      class="bg-yellow-400 w-2/5 mx-auto hover:bg-yellow-300 font-semibold px-6 py-3 rounded-full"
+      class="font-semibold px-6 py-3 rounded-full" style={`background-color: ${data.shop.accentColor};`}
       on:click={() => exit()}
       type="submit"
     >
@@ -90,7 +90,7 @@
   <div class="flex flex-col-reverse lg:flex-row gap-10">
     <section class="basis-1/2">
       <h3 class="flex items-center gap-5 border-b border-b-lines pb-3">
-        <Step>1</Step>
+        <Step accentColor={data.shop.accentColor}>1</Step>
         <span class="text-secondary-600 font-bold text-3xl">
           Контакна інформація
         </span>
@@ -115,7 +115,7 @@
       />
 
       <h3 class="flex items-center gap-5 border-b border-b-lines pb-3 mt-12">
-        <Step>2</Step>
+        <Step accentColor={data.shop.accentColor}>2</Step>
         <span class="text-secondary-600 font-bold text-3xl">
           Деталі доставки
         </span>
@@ -139,8 +139,9 @@
       />
 
       <button
-        class="bg-yellow-400 disabled:bg-secondary-300 hover:bg-yellow-300
-          font-semibold px-20 text-secondary-700 py-6 rounded-full mt-12"
+        class=" disabled:bg-secondary-300 
+         font-semibold px-20 text-secondary-700 py-6 rounded-full mt-12"
+        style={`background-color: ${data.shop.accentColor};`}
         on:click={() => order()}
         type="submit"
         disabled={isInvalid}

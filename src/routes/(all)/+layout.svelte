@@ -62,7 +62,7 @@
 </header>
 
 <Dialog class="flex justify-end items-start" bind:open={cartOpen}>
-  <CartDialogContent close={() => (cartOpen = false)} />
+  <CartDialogContent accentColor={data.shop.accentColor} close={() => (cartOpen = false)} />
 </Dialog>
 
 <slot />

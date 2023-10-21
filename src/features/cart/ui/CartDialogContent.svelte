@@ -5,8 +5,9 @@
   import Close from "./Close.svelte"
 
   export let close: () => void
+  export let accentColor : String;
 
-  function changeAmount(id: string, num: number) {
+  function changeAmount(id: string, num: number): void {
     cart.changeAmount(id, num)
   }
 
@@ -80,6 +81,7 @@
     <div class="grid place-items-center">
       <a
         class="rounded-full border border-lines py-6 mt-7 px-11"
+        style={`background-color: ${accentColor};`}
         href="/order"
         on:click={close}
       >
