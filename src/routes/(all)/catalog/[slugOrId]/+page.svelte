@@ -7,7 +7,7 @@
 
   export let data: PageData
 
-  $: images = data.product.images ??[]
+  $: images = data.product.images ?? []
 
   let amount = 1
   let currentImage = 0
@@ -143,13 +143,16 @@
         {data.product.name}
       </h1>
       {#if data.product.isDiscount}
-      <p class="text-xl text-red-500 mt-5">
-        <span class="mr-3 text-gray-500 line-through">{data.product.price} грн.</span> {data.product.discountPrice} грн.
-      </p>
+        <p class="text-xl text-red-500 mt-5">
+          <span class="mr-3 text-gray-500 line-through"
+            >{data.product.price} грн.</span
+          >
+          {data.product.discountPrice} грн.
+        </p>
       {:else}
-      <p class="text-xl text-red-500 mt-5">
-        {data.product.price} грн.
-      </p>
+        <p class="text-xl text-red-500 mt-5">
+          {data.product.price} грн.
+        </p>
       {/if}
       <p class="md:text-lg lg:text-xl text-gray-600 mt-8">
         {data.product.description}
@@ -166,17 +169,18 @@
         {:else}
           <button
             on:click={() =>
-            cart.add({
-              id: data.product.id,
-              name: data.product.name,
-              price: data.product.price,
-              discountPrice: data.product.discountPrice,
-              isDiscount: data.product.isDiscount,
-              amount: amount
-            })}
-          class="px-14 py-5 rounded-full border border-lines md:w-fit w-full" style={`background-color: ${data.shop.accentColor};`}
+              cart.add({
+                id: data.product.id,
+                name: data.product.name,
+                price: data.product.price,
+                discountPrice: data.product.discountPrice,
+                isDiscount: data.product.isDiscount,
+                amount: amount
+              })}
+            class="px-14 py-5 rounded-full border border-lines md:w-fit w-full"
+            style={`background-color: ${data.shop.accentColor};`}
           >
-          Додати до кошику
+            Додати до кошику
           </button>
         {/if}
 
@@ -230,15 +234,18 @@
           >
             {similarProduct.name}
           </h3>
-            {#if similarProduct.isDiscount}
+          {#if similarProduct.isDiscount}
             <p class="reak-words whitespace-normal text-secondary text-20">
-              {similarProduct.discountPrice} грн. <sup class="text-secondary-400 line-through"> {similarProduct.price}</sup>
+              {similarProduct.discountPrice} грн.
+              <sup class="text-secondary-400 line-through">
+                {similarProduct.price}</sup
+              >
             </p>
-            {:else}
+          {:else}
             <p class="reak-words whitespace-normal text-secondary text-20">
               {similarProduct.price} грн.
             </p>
-            {/if}
+          {/if}
         </div>
       </a>
     {/each}

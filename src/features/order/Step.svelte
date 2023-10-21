@@ -1,5 +1,5 @@
 <script lang="ts">
-   export let accentColor: String;
+  export let accentColor: String
 </script>
 
 <span

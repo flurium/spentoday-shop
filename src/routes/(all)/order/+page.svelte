@@ -75,7 +75,8 @@
     <br />
 
     <button
-      class="font-semibold px-6 py-3 rounded-full" style={`background-color: ${data.shop.accentColor};`}
+      class="font-semibold px-6 py-3 rounded-full"
+      style={`background-color: ${data.shop.accentColor};`}
       on:click={() => exit()}
       type="submit"
     >
@@ -139,7 +140,7 @@
       />
 
       <button
-        class=" disabled:bg-secondary-300 
+        class=" disabled:bg-secondary-300
          font-semibold px-20 text-secondary-700 py-6 rounded-full mt-12"
         style={`background-color: ${data.shop.accentColor};`}
         on:click={() => order()}

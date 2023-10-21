@@ -21,7 +21,6 @@
 </div>
 
 <style lang="postcss">
-
   .content :global(h1) {
     @apply mb-12 text-6xl font-bold;
   }
@@ -42,24 +41,23 @@
 
   .content :global(ul) {
     @apply list-none list-inside text-xl my-5;
-     padding-left: 2rem;
-     margin-top: 1rem;
+    padding-left: 2rem;
+    margin-top: 1rem;
   }
 
   .content :global(ol) {
     @apply list-decimal list-inside text-xl my-5;
-    padding-left: 2rem; 
+    padding-left: 2rem;
     margin-top: 1rem;
   }
 
   .content :global(li) {
     @apply mb-2;
-    line-height: 2; 
-    
+    line-height: 2;
   }
 
   .content :global(img) {
-    @apply  h-auto my-16  border-2 border-secondary-400 rounded-3xl;
+    @apply h-auto my-16  border-2 border-secondary-400 rounded-3xl;
   }
 
   .table {
@@ -67,19 +65,19 @@
   }
 
   .content :global(ul li::before) {
-    content: '\2013'; 
-    left: -1.25rem; 
-    top: 0.25rem; 
+    content: "\2013";
+    left: -1.25rem;
+    top: 0.25rem;
     font-size: 1.25rem;
   }
 
   .content :global(a) {
     @apply text-lg;
-     text-decoration: underline;
+    text-decoration: underline;
   }
 
   .content :global(a:hover) {
-    text-decoration: none; 
+    text-decoration: none;
   }
 
   .content :global(pre) {
