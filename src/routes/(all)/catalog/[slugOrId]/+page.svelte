@@ -1,13 +1,14 @@
 <script lang="ts">
+  import type { PageData } from "./$types"
   import { cart } from "$features/cart"
   import Minus from "$features/cart/ui/Minus.svelte"
   import Plus from "$features/cart/ui/Plus.svelte"
-  import type { PageData } from "./$types"
   import Seo from "$lib/components/Seo.svelte"
+  import ProductCard from "$features/catalog/ProductCard.svelte"
 
   export let data: PageData
 
-  $: images = data.product.images ?? []
+  let images = data.product.images
 
   let amount = 1
   let currentImage = 0
@@ -40,10 +41,14 @@
   <div class="flex gap-1 mb-6">
     {#each data.categories as category, i}
       {#if i < data.categories.length - 1}
-        <span class="text-secondary-400">{category}</span>
+        <a href="/catalog?categories={category.id}" class="text-secondary-400">
+          {category.name}
+        </a>
         <span class="text-secondary-400">{"/"}</span>
       {:else}
-        <span class="text-secondary-700">{category}</span>
+        <a href="/catalog?categories={category.id}" class="text-secondary-700">
+          {category.name}
+        </a>
       {/if}
     {/each}
   </div>
@@ -127,11 +132,10 @@
           {#each images as image, i}
             <button
               class="w-24 md:w-32 h-auto border border-secondary-300
-              {i == images.length - 1 ? '' : 'mr-4'}
-              "
+              {i == images.length - 1 ? '' : 'mr-4'}"
               on:click={() => (currentImage = i)}
             >
-              <img class="" src={image} alt={image} />
+              <img src={image} alt={image} />
             </button>
           {/each}
         </div>
@@ -208,46 +212,13 @@
     </div>
   </div>
 
-  <h2 class="text-4xl font-bold text-secondary-700 mt-36">
-    ТАКОЖ МОЖЕ <br /> СПОДОБАТИСЬ
+  <h2 class="text-4xl md:text-6xl font-bold text-secondary-700 mt-36 mb-10">
+    ТАКОЖ МОЖЕ СПОДОБАТИСЬ
   </h2>
 
   <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
     {#each data.similarProducts as similarProduct}
-      <a
-        href="/catalog/{similarProduct.seoSlug == ''
-          ? similarProduct.id
-          : similarProduct.seoSlug}"
-      >
-        {#if similarProduct.image != null}
-          <div class="w-full h-auto px-2 mt-7 border-rgb-169-167-167 border-1">
-            <img
-              class="w-full h-auto object-contain border border-gray-300 mb-2"
-              src={similarProduct.image}
-              alt="Product"
-            />
-          </div>
-        {/if}
-        <div class="text-left pl-2">
-          <h3
-            class="font-inter font-semibold leading-6 tracking-normal text-gray-700 text-20"
-          >
-            {similarProduct.name}
-          </h3>
-          {#if similarProduct.isDiscount}
-            <p class="reak-words whitespace-normal text-secondary text-20">
-              {similarProduct.discountPrice} грн.
-              <sup class="text-secondary-400 line-through">
-                {similarProduct.price}</sup
-              >
-            </p>
-          {:else}
-            <p class="reak-words whitespace-normal text-secondary text-20">
-              {similarProduct.price} грн.
-            </p>
-          {/if}
-        </div>
-      </a>
+      <ProductCard product={similarProduct} />
     {/each}
   </div>
 </div>

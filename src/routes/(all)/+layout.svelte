@@ -100,10 +100,5 @@
         <span class="text-secondary-400">КОНТАКТИ</span>
       </div>
     </div>
-
-    <div class="border-t border-lines flex justify-between mt-16">
-      <span>Copyright 2023. {data.shop?.name}</span>
-      <a href="/legal">Легальні документи</a>
-    </div>
   </div>
 </footer>
