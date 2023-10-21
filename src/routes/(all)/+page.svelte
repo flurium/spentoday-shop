@@ -1,6 +1,7 @@
 <script lang="ts">
   import ProductCard from "$features/catalog/ProductCard.svelte"
   import BannerSlider from "$features/home/BannerSlider.svelte"
+  import Tagline from "$features/home/Tagline.svelte"
   import ListLink from "$lib/components/ListLink.svelte"
   import Seo from "$lib/components/Seo.svelte"
   import type { PageData } from "./$types"
@@ -39,17 +40,7 @@
       />
     </div>
 
-    <div
-      class="text-xl font-semibold text-secondary-500 border-y border-lines
-      flex justify-around items-center"
-    >
-      {#each phrases as phrase, i}
-        <div class="py-4 uppercase">{phrase}</div>
-        {#if i != phrases.length - 1}
-          <div>/</div>
-        {/if}
-      {/each}
-    </div>
+    <Tagline {phrases} />
   </div>
 {/if}
 
