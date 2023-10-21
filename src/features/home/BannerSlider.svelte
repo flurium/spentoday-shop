@@ -2,7 +2,7 @@
   import type { HomeBanner } from "../../routes/(all)/+page"
 
   export let banners: HomeBanner[]
-  const numVisibleBanners = 4
+  const numVisibleBanners = 2
   let startIndexBanners = 0
 
   let arrowsVisible = false
@@ -40,6 +40,7 @@
   on:blur={hideArrows}
 >
   <div class="mt-20">
+    <!-- svelte-ignore a11y-no-static-element-interactions -->
     <div class="flex items-center justify-center">
       <div class="w-full overflow-x-hidden overflow-y-hidden mx-12">
         <div class="grid grid-cols-2 gap-4">
@@ -69,9 +70,9 @@
               banners,
               -1
             ))}
-          class:hidden={!arrowsVisible}
-          on:mouseenter={showArrows}
-          on:mouseleave={hideArrows}>&#60;</button
+         class:hidden={!arrowsVisible} >
+          &#60;
+          </button
         >
         <button
           class="absolute right-0 mr-7 mt-1/2 -translate-y-1/2 focus:outline-none hover:bg-gray-200"
@@ -82,10 +83,7 @@
               banners,
               1
             ))}
-          class:hidden={!arrowsVisible}
-          on:mouseenter={showArrows}
-          on:mouseleave={hideArrows}
-        >
+          class:hidden={!arrowsVisible} >
           &#62;
         </button>
       </div>

@@ -8,14 +8,6 @@
   export let data: PageData
 
   let products = data.shopData.products
-
-  let phrases = [
-    "Великий вибір",
-    "Новий стиль",
-    "Великий вибір",
-    "Новий стиль",
-    "Великий вибір"
-  ]
 </script>
 
 <Seo
@@ -43,9 +35,9 @@
       class="text-xl font-semibold text-secondary-500 border-y border-lines
       flex justify-around items-center"
     >
-      {#each phrases as phrase, i}
+      {#each data.shopData.slogans as phrase, i}
         <div class="py-4 uppercase">{phrase}</div>
-        {#if i != phrases.length - 1}
+        {#if i != data.shopData.slogans.length-1}
           <div>/</div>
         {/if}
       {/each}
