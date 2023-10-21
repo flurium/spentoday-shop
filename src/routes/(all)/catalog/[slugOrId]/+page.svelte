@@ -212,7 +212,9 @@
     </div>
   </div>
 
-  <table class="table-auto w-full border-collapse border border-lines my-10">
+  <table
+    class="table-auto w-full border-collapse border border-lines my-10 text-secondary-700"
+  >
     {#each data.product.properties as property}
       <tr>
         <td class="border border-lines text-left p-3">{property.key}</td>
