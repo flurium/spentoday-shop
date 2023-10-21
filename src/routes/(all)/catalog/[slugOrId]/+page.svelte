@@ -1,10 +1,10 @@
 <script lang="ts">
-  import type { PageData } from "./$types"
   import { cart } from "$features/cart"
   import Minus from "$features/cart/ui/Minus.svelte"
   import Plus from "$features/cart/ui/Plus.svelte"
   import Seo from "$lib/components/Seo.svelte"
   import ProductCard from "$features/catalog/ProductCard.svelte"
+  import type { PageData } from "./$types"
 
   export let data: PageData
 
@@ -148,9 +148,9 @@
       </h1>
       {#if data.product.isDiscount}
         <p class="text-xl text-red-500 mt-5">
-          <span class="mr-3 text-gray-500 line-through"
-            >{data.product.price} грн.</span
-          >
+          <span class="mr-3 text-gray-500 line-through">
+            {data.product.price} грн.
+          </span>
           {data.product.discountPrice} грн.
         </p>
       {:else}
@@ -211,6 +211,15 @@
       </div>
     </div>
   </div>
+
+  <table class="table-auto w-full border-collapse border border-lines my-10">
+    {#each data.product.properties as property}
+      <tr>
+        <td class="border border-lines text-left p-3">{property.key}</td>
+        <td class="border border-lines text-left p-3">{property.value}</td>
+      </tr>
+    {/each}
+  </table>
 
   <h2 class="text-4xl md:text-6xl font-bold text-secondary-700 mt-36 mb-10">
     ТАКОЖ МОЖЕ СПОДОБАТИСЬ

@@ -14,6 +14,7 @@ export type SingleProduct = {
   seoSlug: string
   description: string
   images: string[]
+  properties: { key: string; value: string }[]
 }
 
 export type ProductItemOutput = {
