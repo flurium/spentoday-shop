@@ -14,7 +14,7 @@
     .then((x) => x.toString())
 </script>
 
-<div class="content m-14 text-secondary-700">
+<div class="content text-secondary-700">
   {#await md then html}
     {@html html}
   {/await}
@@ -33,51 +33,42 @@
     @apply mt-6 mb-4 text-2xl font-semibold;
   }
 
-  .content :global(p),
-  .content :global(ul),
-  .content :global(ol) {
-    @apply mb-4;
-  }
-
   .content :global(ul) {
-    @apply list-none list-inside text-xl my-5;
-    padding-left: 2rem;
-    margin-top: 1rem;
+    @apply list-disc list-inside my-5;
   }
 
   .content :global(ol) {
-    @apply list-decimal list-inside text-xl my-5;
-    padding-left: 2rem;
-    margin-top: 1rem;
+    @apply list-decimal list-inside my-5;
   }
 
   .content :global(li) {
-    @apply mb-2;
-    line-height: 2;
+    @apply mb-4;
+  }
+
+  .content :global(li p) {
+    @apply inline;
   }
 
   .content :global(img) {
-    @apply h-auto my-16  border-2 border-secondary-400 rounded-3xl;
+    @apply m-auto my-16 border border-lines;
   }
 
-  .table {
-    @apply w-full;
+  .content :global(table) {
+    @apply table-auto w-full border-collapse border border-lines;
   }
 
-  .content :global(ul li::before) {
-    content: "\2013";
-    left: -1.25rem;
-    top: 0.25rem;
-    font-size: 1.25rem;
+  .content :global(th),
+  .content :global(td) {
+    @apply border border-lines text-left p-3;
+  }
+
+  .content :global(hr) {
+    @apply my-6;
   }
 
   .content :global(a) {
-    @apply text-lg;
+    @apply decoration-secondary-500;
     text-decoration: underline;
-  }
-
-  .content :global(a:hover) {
-    text-decoration: none;
   }
 
   .content :global(pre) {
@@ -85,6 +76,6 @@
   }
 
   .content :global(blockquote) {
-    @apply p-4 my-4 border-l-4 border-gray-300 bg-gray-50;
+    @apply p-4 my-4 border-l-4 border-secondary-300;
   }
 </style>

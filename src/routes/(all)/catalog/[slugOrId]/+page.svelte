@@ -37,7 +37,7 @@
   images={data.product.images}
 />
 
-<div class="mx-10 pt-16 pb-36">
+<div class="px-4 md:px-6 lg:px-12 pt-16 pb-36">
   <div class="flex gap-1 mb-6">
     {#each data.categories as category, i}
       {#if i < data.categories.length - 1}

@@ -9,8 +9,10 @@ export type InfoPage = {
   time: string
 }
 export const load: PageLoad = async ({ url, params }) => {
+  const domain = getDomain(url)
+
   const response = await call(fetch, {
-    route: `/v1/shop/about/info/${params.slug}`,
+    route: `/v1/shop/about/${domain}/${params.slug}`,
     method: "GET"
   })
 

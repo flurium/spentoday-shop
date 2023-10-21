@@ -50,10 +50,6 @@
     }
   }
 
-  function changeAmount(id: string, num: number) {
-    cart.changeAmount(id, num)
-  }
-
   function remove(id: string) {
     cart.remove(id)
   }
