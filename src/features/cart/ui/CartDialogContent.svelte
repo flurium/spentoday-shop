@@ -5,8 +5,9 @@
   import Close from "./Close.svelte"
 
   export let close: () => void
+  export let accentColor : String;
 
-  function changeAmount(id: string, num: number) {
+  function changeAmount(id: string, num: number): void {
     cart.changeAmount(id, num)
   }
 
@@ -15,7 +16,7 @@
   }
 </script>
 
-<div class="w-full max-w-5xl m-12 bg-white p-12">
+<div class="w-full max-w-5xl bg-white m-4 md:m-6 lg:m-12 p-6 md:p-12">
   <div class="flex justify-between">
     <h3 class="text-4xl text-secondary-700 font-bold">
       КОШИК ({$cart.length})
@@ -25,7 +26,7 @@
 
   {#if $cart.length > 0}
     <div
-      class="grid grid-cols-[1fr_1fr_1fr_auto] place-items-center w-full
+      class="hidden md:grid grid-cols-[1fr_1fr_1fr_auto] place-items-center w-full
       text-secondary-500 font-semibold text-sm mt-10 pb-3"
     >
       <span>Товар</span>
@@ -36,7 +37,7 @@
 
     {#each $cart as product (product.id)}
       <div
-        class="grid grid-cols-[1fr_1fr_1fr_auto] w-full
+        class="grid md:grid-cols-[1fr_1fr_1fr_auto] w-full
           border-t border-t-lines pt-5 mb-8"
       >
         <div class="flex gap-3 items-center">
@@ -80,6 +81,7 @@
     <div class="grid place-items-center">
       <a
         class="rounded-full border border-lines py-6 mt-7 px-11"
+        style={`background-color: ${accentColor};`}
         href="/order"
         on:click={close}
       >
