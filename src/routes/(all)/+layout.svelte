@@ -38,23 +38,23 @@
 </script>
 
 <header class="border-b border-b-lines">
-  <nav class="container-xl px-6 grid grid-cols-10 gap-4 items-center h-14">
-    <a href="/" class="font-bold text-xl text-secondary-600 col-span-2"
-      >{data.shop?.name}</a
-    >
+  <nav class="container-xl px-6 grid grid-cols-4 gap-4 items-center h-14">
+    <a href="/" class="font-bold text-xl text-secondary-600">
+      {data.shop?.name}
+    </a>
 
-    <div class="col-span-4 flex items-center justify-between h-full">
+    <div class="col-span-2 flex items-center justify-between h-full">
       <div class="h-5 w-px bg-lines self-end" />
       <a href="/catalog" class="text-secondary-700 font-medium">КАТАЛОГ</a>
       <a href="/about" class="text-secondary-600">ПРО НАС</a>
       <div class="h-5 w-px bg-lines self-end" />
     </div>
 
-    <div class="col-span-4 flex gap-4">
-      <button class="border border-secondary-300 rounded-full p-1 w-full">
+    <div class="flex justify-end items-center h-full">
+      <!-- <button class="border border-secondary-300 rounded-full p-1 w-full">
         Search
-      </button>
-      <button on:click={toggleCartDialog} aria-label="Корзина">
+      </button> -->
+      <button on:click={toggleCartDialog} class=" h-full" aria-label="Корзина">
         <CartIcon />
       </button>
     </div>

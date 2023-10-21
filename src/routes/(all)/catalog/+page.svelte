@@ -26,17 +26,14 @@
 
   let infinityScroll = false
 
-  let minPrice = products[0].price
-  let maxPrice = minPrice
-  for (let i = 1; i < products.length; i++) {
-    if (products[i].price > maxPrice) maxPrice = products[i].price
-    if (products[i].price < minPrice) minPrice = products[i].price
-  }
+  let minPrice = 0
+  let maxPrice = products.reduce((max, product) => {
+    return product.price > max ? product.price : max
+  }, 0)
 
-  let categories: string[] = []
+  let categories = data.categoriesToSearch
 
   function debounceChange() {
-    console.log("change")
     clearTimeout(timer)
     timer = setTimeout(catalog, 500)
   }
@@ -95,17 +92,7 @@
   domain={data.domain}
 />
 
-<svelte:head>
-  <title>{`Каталог | ${data.shop.name}`}</title>
-  <meta
-    name="description"
-    content={`Каталог в онлайн магазині "${
-      data.shop.name
-    }". Продає: ${data.shop.categories.join(", ")}`}
-  />
-</svelte:head>
-
-<div class="px-10 pt-5 pb-40">
+<div class="px-4 md:px-6 lg:px-12 pt-5 pb-40">
   <input
     class="border border-lines rounded-full py-5 px-8 w-full"
     on:keyup={debounceChange}
@@ -126,49 +113,55 @@
   </div>
 
   <div class="grid md:grid-cols-[auto_1fr] gap-10">
-    <div class="max-w-xs text-secondary-700">
-      <p class="mb-3">Ціна</p>
+    <div class="max-w-xs min-w-[12rem] text-secondary-700">
+      <details open>
+        <summary class="cursor-pointer">Ціна</summary>
 
-      <div class="grid grid-cols-[auto_auto] gap-4">
-        <label class="self-center" for="min">Від</label>
-        <input
-          id="min"
-          class="p-2 border border-lines bg-inherit"
-          type="number"
-          on:keyup={debounceChange}
-          bind:value={minPrice}
-          max={maxPrice}
-          min={0}
-        />
-        <label class="self-center" for="max">До</label>
-        <input
-          class="p-2 border border-lines bg-inherit"
-          type="number"
-          id="max"
-          on:keyup={debounceChange}
-          bind:value={maxPrice}
-          min={minPrice}
-        />
-      </div>
-
-      <p class="mt-10 mb-5">Категорія</p>
-
-      {#each data.categories.list as category}
-        <label
-          class="flex gap-3 items-center mb-4 cursor-pointer"
-          style="padding-left: {1.25 * (category.level - 1)}rem"
-        >
+        <div class="grid grid-cols-[auto_auto] gap-4 pt-4 w-full">
+          <label class="self-center" for="min">Від</label>
           <input
-            class="appearance-none h-5 w-5 border-lines
-            border checked:bg-lines cursor-pointer"
-            type="checkbox"
-            value={category.id}
-            bind:group={categories}
+            id="min"
+            class="p-2 border border-lines bg-inherit"
+            type="number"
             on:change={debounceChange}
+            on:input={debounceChange}
+            bind:value={minPrice}
+            max={maxPrice}
+            min={0}
           />
-          {category.name}
-        </label>
-      {/each}
+          <label class="self-center" for="max">До</label>
+          <input
+            class="p-2 border border-lines bg-inherit"
+            type="number"
+            id="max"
+            on:input={debounceChange}
+            on:change={debounceChange}
+            bind:value={maxPrice}
+            min={minPrice}
+          />
+        </div>
+      </details>
+
+      <details class="mt-6" open>
+        <summary class="cursor-pointer mb-4">Категорія</summary>
+
+        {#each data.categories.list as category}
+          <label
+            class="flex gap-3 items-center mb-4 cursor-pointer"
+            style="padding-left: {1.25 * (category.level - 1)}rem"
+          >
+            <input
+              class="appearance-none h-5 w-5 border-lines
+            border checked:bg-lines cursor-pointer"
+              type="checkbox"
+              value={category.id}
+              bind:group={categories}
+              on:change={debounceChange}
+            />
+            {category.name}
+          </label>
+        {/each}
+      </details>
     </div>
     <div>
       <div

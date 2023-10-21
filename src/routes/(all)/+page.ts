@@ -1,5 +1,5 @@
 import type { PageLoad } from "./$types"
-import { call, callJson } from "$lib/fetch"
+import { call, callJson, type StorageImage } from "$lib/fetch"
 import { errors, getDomain } from "$lib"
 
 export type ShopData = {
@@ -23,11 +23,12 @@ export type HomeBanner = {
 
 export type HomeProduct = {
   id: string
+  slug: string
   name: string
   price: number
   discountPrice: number
   isDiscount: boolean
-  image: string
+  image: StorageImage
 }
 
 export const load: PageLoad = async ({ fetch, url }) => {
