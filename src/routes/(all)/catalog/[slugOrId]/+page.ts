@@ -1,4 +1,4 @@
-import { errors, getDomain } from "$lib"
+import { errors, getDomain, type StorageImage } from "$lib"
 import { call, callJson } from "$lib"
 import type { PageLoad } from "./$types"
 
@@ -14,6 +14,7 @@ export type SingleProduct = {
   seoSlug: string
   description: string
   images: string[]
+  properties: { key: string; value: string }[]
 }
 
 export type ProductItemOutput = {
@@ -22,14 +23,17 @@ export type ProductItemOutput = {
   price: number
   discountPrice: number
   isDiscount: boolean
-  seoSlug: string
-  image: string | null
+  slug: string
+  image?: StorageImage
 }
 
 export type ResponseProduct = {
   product: SingleProduct
   products: ProductItemOutput[]
-  categories: string[]
+  categories: {
+    id: string
+    name: string
+  }[]
 }
 
 export const load: PageLoad = async ({ params, url }) => {

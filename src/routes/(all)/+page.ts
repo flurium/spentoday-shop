@@ -9,6 +9,7 @@ export type ShopData = {
   categories: HomeCategory[]
   banners: HomeBanner[]
   products: HomeProduct[]
+  slogans: string[]
 }
 
 type HomeCategory = {

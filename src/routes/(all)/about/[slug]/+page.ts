@@ -1,18 +1,18 @@
 import { call, callJson } from "$lib/fetch"
 import { errors, getDomain } from "$lib"
-import type { PageLoad } from "../../$types"
+import type { PageLoad } from "./$types"
 
 export type InfoPage = {
-   slug :string,
-   title:string,
-   content  : string,
-   time : string
+  slug: string
+  title: string
+  content: string
+  time: string
 }
-
-export const load: PageLoad = async ({fetch, params }) => {
+export const load: PageLoad = async ({ url, params }) => {
+  const domain = getDomain(url)
 
   const response = await call(fetch, {
-    route: `/v1/shop/about/info/${params.slug}`,
+    route: `/v1/shop/about/${domain}/${params.slug}`,
     method: "GET"
   })
 

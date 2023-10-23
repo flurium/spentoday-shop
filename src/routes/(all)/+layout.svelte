@@ -62,7 +62,10 @@
 </header>
 
 <Dialog class="flex justify-end items-start" bind:open={cartOpen}>
-  <CartDialogContent accentColor={data.shop.accentColor} close={() => (cartOpen = false)} />
+  <CartDialogContent
+    accentColor={data.shop.accentColor}
+    close={() => (cartOpen = false)}
+  />
 </Dialog>
 
 <slot />
@@ -96,11 +99,6 @@
       <div class="justify-self-end flex flex-col">
         <span class="text-secondary-400">КОНТАКТИ</span>
       </div>
-    </div>
-
-    <div class="border-t border-lines flex justify-between mt-16">
-      <span>Copyright 2023. {data.shop?.name}</span>
-      <a href="/legal">Легальні документи</a>
     </div>
   </div>
 </footer>

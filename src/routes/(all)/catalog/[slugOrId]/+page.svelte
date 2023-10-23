@@ -2,12 +2,13 @@
   import { cart } from "$features/cart"
   import Minus from "$features/cart/ui/Minus.svelte"
   import Plus from "$features/cart/ui/Plus.svelte"
-  import type { PageData } from "./$types"
   import Seo from "$lib/components/Seo.svelte"
+  import ProductCard from "$features/catalog/ProductCard.svelte"
+  import type { PageData } from "./$types"
 
   export let data: PageData
 
-  $: images = data.product.images ??[]
+  let images = data.product.images
 
   let amount = 1
   let currentImage = 0
@@ -36,14 +37,18 @@
   images={data.product.images}
 />
 
-<div class="mx-10 pt-16 pb-36">
+<div class="px-4 md:px-6 lg:px-12 pt-16 pb-36">
   <div class="flex gap-1 mb-6">
     {#each data.categories as category, i}
       {#if i < data.categories.length - 1}
-        <span class="text-secondary-400">{category}</span>
+        <a href="/catalog?categories={category.id}" class="text-secondary-400">
+          {category.name}
+        </a>
         <span class="text-secondary-400">{"/"}</span>
       {:else}
-        <span class="text-secondary-700">{category}</span>
+        <a href="/catalog?categories={category.id}" class="text-secondary-700">
+          {category.name}
+        </a>
       {/if}
     {/each}
   </div>
@@ -127,11 +132,10 @@
           {#each images as image, i}
             <button
               class="w-24 md:w-32 h-auto border border-secondary-300
-              {i == images.length - 1 ? '' : 'mr-4'}
-              "
+              {i == images.length - 1 ? '' : 'mr-4'}"
               on:click={() => (currentImage = i)}
             >
-              <img class="" src={image} alt={image} />
+              <img src={image} alt={image} />
             </button>
           {/each}
         </div>
@@ -143,13 +147,16 @@
         {data.product.name}
       </h1>
       {#if data.product.isDiscount}
-      <p class="text-xl text-red-500 mt-5">
-        <span class="mr-3 text-gray-500 line-through">{data.product.price} грн.</span> {data.product.discountPrice} грн.
-      </p>
+        <p class="text-xl text-red-500 mt-5">
+          <span class="mr-3 text-gray-500 line-through">
+            {data.product.price} грн.
+          </span>
+          {data.product.discountPrice} грн.
+        </p>
       {:else}
-      <p class="text-xl text-red-500 mt-5">
-        {data.product.price} грн.
-      </p>
+        <p class="text-xl text-red-500 mt-5">
+          {data.product.price} грн.
+        </p>
       {/if}
       <p class="md:text-lg lg:text-xl text-gray-600 mt-8">
         {data.product.description}
@@ -166,17 +173,18 @@
         {:else}
           <button
             on:click={() =>
-            cart.add({
-              id: data.product.id,
-              name: data.product.name,
-              price: data.product.price,
-              discountPrice: data.product.discountPrice,
-              isDiscount: data.product.isDiscount,
-              amount: amount
-            })}
-          class="px-14 py-5 rounded-full border border-lines md:w-fit w-full" style={`background-color: ${data.shop.accentColor};`}
+              cart.add({
+                id: data.product.id,
+                name: data.product.name,
+                price: data.product.price,
+                discountPrice: data.product.discountPrice,
+                isDiscount: data.product.isDiscount,
+                amount: amount
+              })}
+            class="px-14 py-5 rounded-full border border-lines md:w-fit w-full"
+            style={`background-color: ${data.shop.accentColor};`}
           >
-          Додати до кошику
+            Додати до кошику
           </button>
         {/if}
 
@@ -204,43 +212,24 @@
     </div>
   </div>
 
-  <h2 class="text-4xl font-bold text-secondary-700 mt-36">
-    ТАКОЖ МОЖЕ <br /> СПОДОБАТИСЬ
+  <table
+    class="table-auto w-full border-collapse border border-lines my-10 text-secondary-700"
+  >
+    {#each data.product.properties as property}
+      <tr>
+        <td class="border border-lines text-left p-3">{property.key}</td>
+        <td class="border border-lines text-left p-3">{property.value}</td>
+      </tr>
+    {/each}
+  </table>
+
+  <h2 class="text-4xl md:text-6xl font-bold text-secondary-700 mt-36 mb-10">
+    ТАКОЖ МОЖЕ СПОДОБАТИСЬ
   </h2>
 
   <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
     {#each data.similarProducts as similarProduct}
-      <a
-        href="/catalog/{similarProduct.seoSlug == ''
-          ? similarProduct.id
-          : similarProduct.seoSlug}"
-      >
-        {#if similarProduct.image != null}
-          <div class="w-full h-auto px-2 mt-7 border-rgb-169-167-167 border-1">
-            <img
-              class="w-full h-auto object-contain border border-gray-300 mb-2"
-              src={similarProduct.image}
-              alt="Product"
-            />
-          </div>
-        {/if}
-        <div class="text-left pl-2">
-          <h3
-            class="font-inter font-semibold leading-6 tracking-normal text-gray-700 text-20"
-          >
-            {similarProduct.name}
-          </h3>
-            {#if similarProduct.isDiscount}
-            <p class="reak-words whitespace-normal text-secondary text-20">
-              {similarProduct.discountPrice} грн. <sup class="text-secondary-400 line-through"> {similarProduct.price}</sup>
-            </p>
-            {:else}
-            <p class="reak-words whitespace-normal text-secondary text-20">
-              {similarProduct.price} грн.
-            </p>
-            {/if}
-        </div>
-      </a>
+      <ProductCard product={similarProduct} />
     {/each}
   </div>
 </div>
