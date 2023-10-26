@@ -174,7 +174,13 @@
       </div>
 
       {#if !infinityScroll}
-        <button on:click={() => (infinityScroll = true)}>Load More</button>
+        <div class="text-center">
+          <button
+            class="rounded-full px-8 py-4"
+            style="background-color: {data.shop.accentColor}"
+            on:click={() => (infinityScroll = true)}>Load More</button
+          >
+        </div>
       {:else}
         <ScrollLoad load={loadMore} />
       {/if}

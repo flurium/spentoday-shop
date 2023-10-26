@@ -63,7 +63,7 @@
     {/each}
   </div>
 
-  <BannerSlider banners={data.shopData.banners} />
+  <!-- <BannerSlider banners={data.shopData.banners} /> -->
 
   <section class="py-32">
     <h2 class="text-5xl md:text-7xl font-bold text-secondary-700 mb-10">

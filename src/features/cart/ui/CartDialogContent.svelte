@@ -81,7 +81,7 @@
     <div class="grid place-items-center">
       <a
         class="rounded-full border border-lines py-6 mt-7 px-11"
-        style={`background-color: ${accentColor};`}
+        style="background-color: {accentColor}"
         href="/order"
         on:click={close}
       >
