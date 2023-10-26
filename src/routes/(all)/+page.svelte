@@ -9,14 +9,7 @@
   export let data: PageData
 
   let products = data.shopData.products
-
-  let phrases = [
-    "Великий вибір",
-    "Новий стиль",
-    "Великий вибір",
-    "Новий стиль",
-    "Великий вибір"
-  ]
+  let phrases = data.shopData.slogans
 </script>
 
 <Seo
