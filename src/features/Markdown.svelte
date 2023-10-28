@@ -22,11 +22,11 @@
 
 <style lang="postcss">
   .content :global(h1) {
-    @apply mb-12 text-6xl font-bold;
+    @apply mb-12 text-5xl font-bold;
   }
 
   .content :global(h2) {
-    @apply mt-8 mb-4 text-4xl font-semibold;
+    @apply mt-8 mb-4 text-3xl font-semibold;
   }
 
   .content :global(h3) {

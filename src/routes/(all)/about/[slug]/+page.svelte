@@ -7,7 +7,9 @@
 </script>
 
 <div class="px-4 md:px-6 lg:px-12 py-12">
-  <h1 class="text-5xl md:text-7xl text-secondary-700 font-bold mb-6">
+  <h1
+    class="text-3xl md:text-5xl lg:text-7xl text-secondary-700 font-bold mb-6"
+  >
     {infoData.title}
   </h1>
   <p class="my-8 text-secondary-600">Дата: {infoData.time}</p>
