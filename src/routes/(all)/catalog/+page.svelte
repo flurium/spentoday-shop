@@ -100,7 +100,7 @@
     placeholder="Пошук продуктів"
   />
 
-  <div class="flex justify-end my-3">
+  <div class="flex justify-end my-3 text-secondary-700">
     <select
       class="font-medium cursor-pointer p-3 bg-inherit"
       bind:value={orderBy}
@@ -174,11 +174,11 @@
       </div>
 
       {#if !infinityScroll}
-        <div class="text-center">
+        <div class="text-center mt-8">
           <button
-            class="rounded-full px-8 py-4"
+            class="rounded-full px-8 py-4 border border-lines"
             style="background-color: {data.shop.accentColor}"
-            on:click={() => (infinityScroll = true)}>Load More</button
+            on:click={() => (infinityScroll = true)}>Завантажити більше</button
           >
         </div>
       {:else}
