@@ -15,7 +15,7 @@
 <Seo
   description="{`Онлайн магазин: ${
     data.shop.name
-  }. Продає: ${data.shop.categories.join(', ')}`}}"
+  }. Продає: ${data.shop.categories.map((x) => x.name).join(', ')}`}}"
   shop={data.shop.name}
   domain={data.domain}
 />
