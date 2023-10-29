@@ -21,6 +21,10 @@
 </div>
 
 <style lang="postcss">
+  :global(.content) {
+    @apply break-words;
+  }
+
   .content :global(h1) {
     @apply mb-12 text-5xl font-bold;
   }
