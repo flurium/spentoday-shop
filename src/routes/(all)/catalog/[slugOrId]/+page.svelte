@@ -212,20 +212,26 @@
     </div>
   </div>
 
-  <table
-    class="table-auto w-full border-collapse border border-lines my-10 text-secondary-700"
-  >
-    {#each data.product.properties as property}
-      <tr>
-        <td class="border border-lines text-left p-3">{property.key}</td>
-        <td class="border border-lines text-left p-3">{property.value}</td>
-      </tr>
-    {/each}
-  </table>
+  {#if data.product.properties.length > 0}
+    <h3 class="text-4xl md:text-6xl font-bold text-secondary-700 mt-36 mb-10">
+      ХАРАКТЕРИСТИКИ
+    </h3>
 
-  <h2 class="text-4xl md:text-6xl font-bold text-secondary-700 mt-36 mb-10">
+    <table
+      class="table-auto w-full border-collapse border border-lines my-10 text-secondary-700"
+    >
+      {#each data.product.properties as property}
+        <tr>
+          <td class="border border-lines text-left p-3">{property.key}</td>
+          <td class="border border-lines text-left p-3">{property.value}</td>
+        </tr>
+      {/each}
+    </table>
+  {/if}
+
+  <h3 class="text-4xl md:text-6xl font-bold text-secondary-700 mt-36 mb-10">
     ТАКОЖ МОЖЕ СПОДОБАТИСЬ
-  </h2>
+  </h3>
 
   <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
     {#each data.similarProducts as similarProduct}
