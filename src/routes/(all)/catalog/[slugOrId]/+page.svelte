@@ -8,7 +8,7 @@
 
   export let data: PageData
 
-  let images = data.product.images
+  $: images = data.product.images
 
   $: amount = $cart.find((x) => x.id == data.product.id)?.amount ?? 1
   let currentImage = 0
