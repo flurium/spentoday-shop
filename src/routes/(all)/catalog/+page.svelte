@@ -33,6 +33,8 @@
 
   let categories = data.categoriesToSearch
 
+  let mobileFilterOpen = false
+
   function debounceChange() {
     clearTimeout(timer)
     timer = setTimeout(catalog, 500)
@@ -100,9 +102,18 @@
     placeholder="Пошук продуктів"
   />
 
-  <div class="flex justify-end my-3 text-secondary-700">
+  <div class="flex md:justify-end justify-between my-3 text-secondary-700">
+    <button
+      class="rounded md:hidden text-sm font-medium px-4 py-1 my-2 border border-lines"
+      style="background-color: {data.shop.accentColor}"
+      on:click={() => {
+        mobileFilterOpen = !mobileFilterOpen
+      }}
+    >
+      Фільтрувати
+    </button>
     <select
-      class="font-medium cursor-pointer p-3 bg-inherit"
+      class="font-medium text-sm cursor-pointer p-3 bg-inherit"
       bind:value={orderBy}
       on:change={debounceChange}
     >
@@ -113,7 +124,11 @@
   </div>
 
   <div class="grid md:grid-cols-[auto_1fr] gap-10">
-    <div class="max-w-xs min-w-[12rem] text-secondary-700">
+    <div
+      class="{mobileFilterOpen
+        ? 'block'
+        : 'hidden'} md:block max-w-xs min-w-[12rem] text-secondary-700"
+    >
       <details open>
         <summary class="cursor-pointer">Ціна</summary>
 
