@@ -33,8 +33,7 @@
 
   let categories = data.categoriesToSearch
 
-  let filter: HTMLDivElement
-  let mobileFilterOpen: false
+  let mobileFilterOpen = false
 
   function debounceChange() {
     clearTimeout(timer)
@@ -108,11 +107,7 @@
       class="rounded md:hidden text-sm font-medium px-4 py-1 my-2 border border-lines"
       style="background-color: {data.shop.accentColor}"
       on:click={() => {
-        if (filter.style.display != "block") {
-          filter.style.display = "block"
-          return
-        }
-        filter.style.display = "none"
+        mobileFilterOpen = !mobileFilterOpen
       }}
     >
       Фільтрувати
@@ -130,7 +125,6 @@
 
   <div class="grid md:grid-cols-[auto_1fr] gap-10">
     <div
-      bind:this={filter}
       class="{mobileFilterOpen
         ? 'block'
         : 'hidden'} md:block max-w-xs min-w-[12rem] text-secondary-700"
