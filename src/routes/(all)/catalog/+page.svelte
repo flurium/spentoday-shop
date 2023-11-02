@@ -101,19 +101,20 @@
   />
 
   <div class="flex md:justify-end justify-between my-3 text-secondary-700">
-    <button 
-    class="rounded md:hidden text-sm font-medium px-4 py-1 my-2 border border-lines"
-    style="background-color: {data.shop.accentColor}"
-    on:click={()=>{
-    let filter = document.getElementById(`filter`)
-    if (filter == null) return
-    if (filter.style.display == "none") {
-      filter.style.display = "block" 
-      return
-    }
-    filter.style.display = "none"
-    }}>
-    Фільтрувати
+    <button
+      class="rounded md:hidden text-sm font-medium px-4 py-1 my-2 border border-lines"
+      style="background-color: {data.shop.accentColor}"
+      on:click={() => {
+        let filter = document.getElementById(`filter`)
+        if (filter == null) return
+        if (filter.style.display == "none") {
+          filter.style.display = "block"
+          return
+        }
+        filter.style.display = "none"
+      }}
+    >
+      Фільтрувати
     </button>
     <select
       class="font-medium text-sm cursor-pointer p-3 bg-inherit"
@@ -127,7 +128,10 @@
   </div>
 
   <div class="grid md:grid-cols-[auto_1fr] gap-10">
-    <div id="filter" class="hidden md:grid max-w-xs min-w-[12rem] text-secondary-700">
+    <div
+      id="filter"
+      class="hidden md:grid max-w-xs min-w-[12rem] text-secondary-700"
+    >
       <details open>
         <summary class="cursor-pointer">Ціна</summary>
 
