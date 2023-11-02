@@ -104,7 +104,7 @@
 
   <div class="flex md:justify-end justify-between my-3 text-secondary-700">
     <button
-      class="rounded md:hidden text-sm font-medium px-4 py-1 my-2 border border-lines"
+      class="md:hidden font-medium px-4 py-1 my-2 border border-lines"
       style="background-color: {data.shop.accentColor}"
       on:click={() => {
         mobileFilterOpen = !mobileFilterOpen
