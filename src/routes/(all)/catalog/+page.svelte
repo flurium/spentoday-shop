@@ -107,7 +107,7 @@
     on:click={()=>{
     let filter = document.getElementById(`filter`)
     if (filter == null) return
-    if (filter.style.display == "none") {
+    if (filter.style.display != "block") {
       filter.style.display = "block" 
       return
     }
