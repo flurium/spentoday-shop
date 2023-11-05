@@ -1,7 +1,7 @@
 <script lang="ts">
-  export let open: boolean = false
+  export let open = false
 
-  let className: string = ""
+  let className = ""
   export { className as class }
 
   let backElement: HTMLDivElement

@@ -8,15 +8,16 @@
 
   export let data: PageData
 
-  let images = data.product.images
+  $: images = data.product.images
 
-  let amount = 1
+  $: amount = $cart.find((x) => x.id == data.product.id)?.amount ?? 1
   let currentImage = 0
 
   function changeAmount(arg: number) {
     if (amount == 1 && arg == -1) return
-    amount += arg
+    cart.changeAmount(data.product.id, arg)
   }
+
   function changeImage(arg: number) {
     if (currentImage == 0 && arg == -1) {
       currentImage = images.length - 1
@@ -179,7 +180,11 @@
                 price: data.product.price,
                 discountPrice: data.product.discountPrice,
                 isDiscount: data.product.isDiscount,
-                amount: amount
+                amount: amount,
+                image:
+                  data.product.images.length > 0
+                    ? data.product.images[0]
+                    : undefined
               })}
             class="px-14 py-5 rounded-full border border-lines md:w-fit w-full"
             style={`background-color: ${data.shop.accentColor};`}
