@@ -88,7 +88,7 @@
         <p class="break-words text-secondary-500">{emailMessage}</p>
       </div>
 
-      <div class="flex gap-4">
+      <div class="flex flex-col gap-4">
         <a href="/catalog">КАТАЛОГ</a>
         <a href="/about">ПРО НАС</a>
       </div>
