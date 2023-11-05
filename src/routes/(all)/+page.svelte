@@ -2,6 +2,7 @@
   import ProductCard from "$features/catalog/ProductCard.svelte"
   // import BannerSlider from "$features/home/BannerSlider.svelte"
   import Tagline from "$features/home/Tagline.svelte"
+  import { storageImageUrl } from "$lib"
   import ListLink from "$lib/components/ListLink.svelte"
   import Seo from "$lib/components/Seo.svelte"
   import type { PageData } from "./$types"
@@ -10,6 +11,8 @@
 
   let products = data.shopData.products
   let phrases = data.shopData.slogans
+
+  let product = products.at(0)
 </script>
 
 <Seo
@@ -63,12 +66,27 @@
       ПОПУЛЯРНІ КАТЕГОРІЇ
     </h2>
 
-    {#each data.shopData.categories as category, i}
-      <ListLink
-        link="/catalog?categories={category.id}"
-        title={category.name}
-        index={i}
-      />
-    {/each}
+    <div class="flex flex-col-reverse md:flex-row gap-8 md:gap-12">
+      <div class="md:basis-1/2">
+        {#if product}
+          <a href="/catalog/{product.slug == '' ? product.id : product.slug}">
+            <img
+              class="w-full border border-lines"
+              src={storageImageUrl(product.image)}
+              alt={product.name}
+            />
+          </a>
+        {/if}
+      </div>
+      <div class="md:basis-1/2">
+        {#each data.shopData.categories as category, i}
+          <ListLink
+            link="/catalog?categories={category.id}"
+            title={category.name}
+            index={i}
+          />
+        {/each}
+      </div>
+    </div>
   </section>
 </div>
