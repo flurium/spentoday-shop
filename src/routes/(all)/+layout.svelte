@@ -66,8 +66,8 @@
 <slot />
 
 <footer class="bg-white border-t border-lines pt-16 pb-12">
-  <div class="container-xl px-6">
-    <div class="grid grid-cols-3 gap-4 place-items-center">
+  <div class="container-xl px-4 md:px-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
       <div class="justify-self-start">
         <h3 class="font-bold text-secondary-600 text-2xl">ПІДПИСАТИСЯ</h3>
 
@@ -81,18 +81,16 @@
             class="py-2 w-full"
             placeholder="Електронна пошта"
           />
-          <button type="submit" class="font-semibold text-secondary-500"
-            >ВІДПРАВИТИ</button
-          >
+          <button type="submit" class="font-semibold text-secondary-500">
+            ВІДПРАВИТИ
+          </button>
         </form>
         <p class="break-words text-secondary-500">{emailMessage}</p>
       </div>
-      <div class="flex gap-2">
-        <span>Каталог</span>
-        <span>Про нас</span>
-      </div>
-      <div class="justify-self-end flex flex-col">
-        <span class="text-secondary-400">КОНТАКТИ</span>
+
+      <div class="flex gap-4">
+        <a href="/catalog">КАТАЛОГ</a>
+        <a href="/about">ПРО НАС</a>
       </div>
     </div>
   </div>
