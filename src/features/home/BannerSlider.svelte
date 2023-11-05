@@ -70,10 +70,10 @@
               banners,
               -1
             ))}
-         class:hidden={!arrowsVisible} >
-          &#60;
-          </button
+          class:hidden={!arrowsVisible}
         >
+          &#60;
+        </button>
         <button
           class="absolute right-0 mr-7 mt-1/2 -translate-y-1/2 focus:outline-none hover:bg-gray-200"
           on:click={() =>
@@ -83,7 +83,8 @@
               banners,
               1
             ))}
-          class:hidden={!arrowsVisible} >
+          class:hidden={!arrowsVisible}
+        >
           &#62;
         </button>
       </div>

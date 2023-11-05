@@ -1,7 +1,7 @@
 <script lang="ts">
   export let shop: string
   export let domain: string
-  export let title: string = ""
+  export let title = ""
   export let description: string
   export let images: string[] = []
 </script>

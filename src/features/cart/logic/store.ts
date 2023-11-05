@@ -61,7 +61,7 @@ export function createCart() {
     isDiscount: boolean
     image?: string
   }) {
-    let newProduct: CartProduct = {
+    const newProduct: CartProduct = {
       id: product.id,
       amount: product.amount,
       name: product.name,
