@@ -2,6 +2,7 @@
   import { CartDialogContent, CartIcon } from "$features/cart"
   import { call } from "$lib"
   import Dialog from "$lib/components/Dialog.svelte"
+    import ListLink from "$lib/components/ListLink.svelte"
   import type { LayoutData } from "./$types"
 
   export let data: LayoutData
@@ -67,7 +68,7 @@
 
 <footer class="bg-white border-t border-lines pt-16 pb-12">
   <div class="container-xl px-4 md:px-6">
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+    <div class="grid grid-cols-1 gap-8 md:justify-between md:flex">
       <div class="justify-self-start">
         <h3 class="font-bold text-secondary-600 text-2xl">ПІДПИСАТИСЯ</h3>
 
@@ -88,10 +89,15 @@
         <p class="break-words text-secondary-500">{emailMessage}</p>
       </div>
 
-      <div class="flex flex-col gap-4">
+        <div class="flex flex-col gap-4">
         <a href="/catalog">КАТАЛОГ</a>
         <a href="/about">ПРО НАС</a>
-      </div>
+        </div>
+        <div class="flex flex-col gap-4">
+          {#each data.shop.socialMediaLinks as link}
+              <a href={link.link}>{link.name}</a>
+          {/each}
+        </div>
     </div>
   </div>
 </footer>
