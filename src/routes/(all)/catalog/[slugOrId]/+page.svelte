@@ -54,8 +54,8 @@
     {/each}
   </div>
 
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
-    <div>
+  <div class="grid grid-cols-1 md:grid-cols-5 gap-10">
+    <div class="md:col-span-2">
       <div class="relative">
         <div
           class="relative border border-gray-400 w-full overflow-hidden after:clear-both after:block after:content-['']"
@@ -143,7 +143,7 @@
       </div>
     </div>
 
-    <div>
+    <div class="md:col-span-3">
       <h1 class="font-bold text-5xl text-secondary-700">
         {data.product.name}
       </h1>
